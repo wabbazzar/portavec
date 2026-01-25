@@ -28,5 +28,5 @@ if (typeof ImageData === 'undefined') {
     }
   }
 
-  (global as unknown as Record<string, unknown>).ImageData = ImageDataPolyfill;
+  (globalThis as unknown as Record<string, unknown>).ImageData = ImageDataPolyfill;
 }

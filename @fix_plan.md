@@ -48,11 +48,11 @@
 
 ## Phase 3: B&W Implementation (Priority: High)
 
-### Threshold Stage
-- [ ] Implement src/algorithms/threshold/otsu.ts with Otsu's automatic threshold method
-- [ ] Implement src/algorithms/threshold/adaptive.ts with block-based adaptive threshold
-- [ ] Create src/algorithms/threshold/index.ts with unified threshold function
-- [ ] Write unit tests for threshold algorithms (known input/output pairs)
+### Threshold Stage - COMPLETE
+- [x] Implement src/algorithms/threshold/otsu.ts with Otsu's automatic threshold method
+- [x] Implement src/algorithms/threshold/adaptive.ts with block-based adaptive threshold
+- [x] Create src/algorithms/threshold/index.ts with unified threshold function
+- [x] Write unit tests for threshold algorithms (known input/output pairs)
 
 ### Edge Detection Stage
 - [ ] Implement src/algorithms/edge-detection/sobel.ts with Sobel operator
