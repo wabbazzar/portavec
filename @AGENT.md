@@ -1,49 +1,52 @@
 # Agent Build Instructions
 
+## Project: Portavec
+
+Browser-based raster-to-vector conversion tool with ground-truth benchmarking.
+
+**Tech Stack**: Vite + React + TypeScript + Vitest
+
 ## Project Setup
 ```bash
-# Install dependencies (example for Node.js project)
+# Install dependencies
 npm install
-
-# Or for Python project
-pip install -r requirements.txt
-
-# Or for Rust project  
-cargo build
 ```
 
 ## Running Tests
 ```bash
-# Node.js
+# Run tests once
+npm test -- --run
+
+# Run tests in watch mode
 npm test
 
-# Python
-pytest
-
-# Rust
-cargo test
+# Run tests with coverage
+npm run test:coverage
 ```
 
 ## Build Commands
 ```bash
-# Production build
+# TypeScript check + production build
 npm run build
-# or
-cargo build --release
+
+# Lint the code
+npm run lint
 ```
 
 ## Development Server
 ```bash
-# Start development server
+# Start development server (http://localhost:5173)
 npm run dev
-# or
-cargo run
+
+# Preview production build
+npm run preview
 ```
 
 ## Key Learnings
-- Update this section when you learn new build optimizations
-- Document any gotchas or special setup requirements
-- Keep track of the fastest test/build cycle
+- ImageData polyfill required for vitest canvas tests (see tests/setup.ts)
+- Use `npm test -- --run` for single test run (no watch mode)
+- Build runs TypeScript compilation first, then Vite build
+- jsdom environment enables DOM APIs in tests
 
 ## Feature Development Quality Standards
 

@@ -1,0 +1,66 @@
+.diff-overlay {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.diff-label {
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+}
+
+.diff-buttons {
+  display: flex;
+  gap: 4px;
+  background-color: var(--bg-secondary);
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.diff-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.diff-button:hover {
+  background-color: var(--bg-panel);
+  color: var(--text-primary);
+}
+
+.diff-button.active {
+  background-color: var(--accent-primary);
+  color: white;
+}
+
+.diff-icon {
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.diff-text {
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .diff-text {
+    display: none;
+  }
+
+  .diff-button {
+    padding: 6px 10px;
+  }
+}
