@@ -54,11 +54,11 @@
 - [x] Create src/algorithms/threshold/index.ts with unified threshold function
 - [x] Write unit tests for threshold algorithms (known input/output pairs)
 
-### Edge Detection Stage
-- [ ] Implement src/algorithms/edge-detection/sobel.ts with Sobel operator
-- [ ] Implement src/algorithms/edge-detection/canny.ts with Canny edge detector
-- [ ] Create src/algorithms/edge-detection/index.ts with Edge interface and exports
-- [ ] Write unit tests for edge detection (simple shapes, expected edge counts)
+### Edge Detection Stage - COMPLETE
+- [x] Implement src/algorithms/edge-detection/sobel.ts with Sobel operator
+- [x] Implement src/algorithms/edge-detection/canny.ts with Canny edge detector
+- [x] Create src/algorithms/edge-detection/index.ts with Edge interface and exports
+- [x] Write unit tests for edge detection (simple shapes, expected edge counts)
 
 ### Contour Tracing Stage
 - [ ] Implement src/algorithms/contour-tracing/marching-squares.ts
