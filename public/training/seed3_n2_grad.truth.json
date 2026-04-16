@@ -1,0 +1,56 @@
+{
+  "width": 256,
+  "height": 256,
+  "background": "#ffffff",
+  "palette": [
+    "#5d20df",
+    "#a2df20",
+    "#2945d0",
+    "#34d86b"
+  ],
+  "shapes": [
+    {
+      "kind": "circle",
+      "cx": 63,
+      "cy": 168,
+      "r": 52,
+      "color": "#5d20df",
+      "gradient": {
+        "kind": "radial",
+        "center": {
+          "x": 63,
+          "y": 168
+        },
+        "radius": 52,
+        "stops": [
+          "#5d20df",
+          "#2945d0"
+        ]
+      }
+    },
+    {
+      "kind": "rectangle",
+      "x": 53,
+      "y": 121,
+      "w": 54,
+      "h": 38,
+      "color": "#a2df20",
+      "gradient": {
+        "kind": "linear",
+        "p0": {
+          "x": 53.11738409875018,
+          "y": 137.48505222601537
+        },
+        "p1": {
+          "x": 106.88261590124982,
+          "y": 142.51494777398463
+        },
+        "stops": [
+          "#a2df20",
+          "#34d86b"
+        ]
+      }
+    }
+  ],
+  "seed": 3
+}

@@ -1,0 +1,27 @@
+{
+  "width": 256,
+  "height": 256,
+  "background": "#ffffff",
+  "palette": [
+    "#6d20df",
+    "#92df20"
+  ],
+  "shapes": [
+    {
+      "kind": "circle",
+      "cx": 134,
+      "cy": 191,
+      "r": 44,
+      "color": "#6d20df"
+    },
+    {
+      "kind": "rectangle",
+      "x": 158,
+      "y": 23,
+      "w": 54,
+      "h": 48,
+      "color": "#92df20"
+    }
+  ],
+  "seed": 2
+}

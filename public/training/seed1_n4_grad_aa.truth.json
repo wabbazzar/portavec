@@ -1,0 +1,106 @@
+{
+  "width": 256,
+  "height": 256,
+  "background": "#ffffff",
+  "palette": [
+    "#204ddf",
+    "#df20ad",
+    "#dfb220",
+    "#20df52",
+    "#9032d7",
+    "#d87d36",
+    "#cc283c",
+    "#35a0d8"
+  ],
+  "shapes": [
+    {
+      "kind": "circle",
+      "cx": 214,
+      "cy": 212,
+      "r": 39,
+      "color": "#204ddf",
+      "gradient": {
+        "kind": "linear",
+        "p0": {
+          "x": 218.23853262966497,
+          "y": 173.23100670449043
+        },
+        "p1": {
+          "x": 209.76146737033503,
+          "y": 250.76899329550957
+        },
+        "stops": [
+          "#204ddf",
+          "#9032d7"
+        ]
+      }
+    },
+    {
+      "kind": "circle",
+      "cx": 166,
+      "cy": 115,
+      "r": 42,
+      "color": "#df20ad",
+      "gradient": {
+        "kind": "radial",
+        "center": {
+          "x": 166,
+          "y": 115
+        },
+        "radius": 42,
+        "stops": [
+          "#df20ad",
+          "#d87d36"
+        ]
+      }
+    },
+    {
+      "kind": "triangle",
+      "p1": {
+        "x": 33,
+        "y": 88
+      },
+      "p2": {
+        "x": 67,
+        "y": 91
+      },
+      "p3": {
+        "x": 48,
+        "y": 126
+      },
+      "color": "#dfb220",
+      "gradient": {
+        "kind": "radial",
+        "center": {
+          "x": 50,
+          "y": 107
+        },
+        "radius": 19,
+        "stops": [
+          "#dfb220",
+          "#cc283c"
+        ]
+      }
+    },
+    {
+      "kind": "circle",
+      "cx": 178,
+      "cy": 88,
+      "r": 35,
+      "color": "#20df52",
+      "gradient": {
+        "kind": "radial",
+        "center": {
+          "x": 178,
+          "y": 88
+        },
+        "radius": 35,
+        "stops": [
+          "#20df52",
+          "#35a0d8"
+        ]
+      }
+    }
+  ],
+  "seed": 1
+}

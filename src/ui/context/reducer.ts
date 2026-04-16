@@ -11,6 +11,13 @@ export interface Parameters {
   threshold: number;       // 0-255
   curveTolerance: number;  // 0.1-10.0
   minPathLength: number;   // 1-100 pixels
+  /**
+   * Number of colors for multi-color vectorization.
+   *   1    — single-color pipeline (existing behavior)
+   *   2-16 — multi-color pipeline, manual k
+   *   0    — multi-color pipeline, auto-k (elbow)
+   */
+  colors: number;
 }
 
 export type DiffMode = 'side-by-side' | 'onion' | 'difference' | 'toggle';
@@ -59,6 +66,7 @@ export const initialState: AppState = {
     threshold: 128,
     curveTolerance: 2.0,
     minPathLength: 10,
+    colors: 1,
   },
 
   diffMode: 'side-by-side',

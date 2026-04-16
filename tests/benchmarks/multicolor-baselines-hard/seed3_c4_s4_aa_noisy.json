@@ -1,0 +1,122 @@
+{
+  "input": {
+    "seed": 3,
+    "colors": 4,
+    "shapeCount": 4,
+    "size": 256,
+    "allowOverlap": true,
+    "noise": "aa_noisy"
+  },
+  "noise": "aa_noisy",
+  "truth": {
+    "palette": [
+      "#5d20df",
+      "#df2042",
+      "#a2df20",
+      "#20dfbd"
+    ],
+    "shapes": [
+      {
+        "kind": "circle",
+        "color": "#5d20df"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#df2042"
+      },
+      {
+        "kind": "circle",
+        "color": "#a2df20"
+      },
+      {
+        "kind": "triangle",
+        "color": "#20dfbd"
+      }
+    ]
+  },
+  "output": {
+    "k": 19,
+    "palette": [
+      "#fefefe",
+      "#5d20df",
+      "#a3e021",
+      "#e02143",
+      "#d9f6f4",
+      "#22e1be",
+      "#dcf4aa",
+      "#c4eb6e",
+      "#bca4f3",
+      "#9771ed",
+      "#b692f2",
+      "#cef090",
+      "#e1d4f7",
+      "#74ecd7",
+      "#acf1e6",
+      "#b4e749",
+      "#8253e9",
+      "#d22ee1",
+      "#eff8e1"
+    ],
+    "layerPixelCounts": [
+      57916,
+      4020,
+      1756,
+      1022,
+      24,
+      486,
+      29,
+      13,
+      22,
+      32,
+      17,
+      17,
+      27,
+      29,
+      24,
+      29,
+      39,
+      4,
+      30
+    ],
+    "svgByteLength": 6165
+  },
+  "loss": {
+    "paletteMatch": 0.9919651335430645,
+    "coverageIoU": 0.9713275955525353,
+    "centroidError": 0.00034667748008552243,
+    "loss": 0.017584816554515048,
+    "matches": [
+      1,
+      3,
+      2,
+      5
+    ],
+    "perShape": [
+      {
+        "truthColor": "#5d20df",
+        "matchedColor": "#5d20df",
+        "iou": 0.981201171875,
+        "centroidDistPx": 0.08358019848942982
+      },
+      {
+        "truthColor": "#df2042",
+        "matchedColor": "#e02143",
+        "iou": 0.9961013645224172,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#a2df20",
+        "matchedColor": "#a3e021",
+        "iou": 0.9733924611973392,
+        "centroidDistPx": 0.04268412232675098
+      },
+      {
+        "truthColor": "#20dfbd",
+        "matchedColor": "#22e1be",
+        "iou": 0.9346153846153846,
+        "centroidDistPx": 0.3757782971486442
+      }
+    ]
+  },
+  "timingMs": 487.6345500000025
+}

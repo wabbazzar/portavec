@@ -1,0 +1,93 @@
+{
+  "width": 256,
+  "height": 256,
+  "background": "#ffffff",
+  "palette": [
+    "#204ddf",
+    "#8220df",
+    "#df20ad",
+    "#df2220",
+    "#dfb220",
+    "#7ddf20",
+    "#20df52",
+    "#20dddf"
+  ],
+  "shapes": [
+    {
+      "kind": "circle",
+      "cx": 225,
+      "cy": 222,
+      "r": 28,
+      "color": "#204ddf"
+    },
+    {
+      "kind": "circle",
+      "cx": 171,
+      "cy": 113,
+      "r": 30,
+      "color": "#8220df"
+    },
+    {
+      "kind": "triangle",
+      "p1": {
+        "x": 34,
+        "y": 92
+      },
+      "p2": {
+        "x": 58,
+        "y": 94
+      },
+      "p3": {
+        "x": 45,
+        "y": 119
+      },
+      "color": "#df20ad"
+    },
+    {
+      "kind": "circle",
+      "cx": 184,
+      "cy": 83,
+      "r": 24,
+      "color": "#df2220"
+    },
+    {
+      "kind": "circle",
+      "cx": 112,
+      "cy": 148,
+      "r": 16,
+      "color": "#dfb220"
+    },
+    {
+      "kind": "triangle",
+      "p1": {
+        "x": 160,
+        "y": 129
+      },
+      "p2": {
+        "x": 176,
+        "y": 131
+      },
+      "p3": {
+        "x": 170,
+        "y": 149
+      },
+      "color": "#7ddf20"
+    },
+    {
+      "kind": "rectangle",
+      "x": 53,
+      "y": 165,
+      "w": 34,
+      "h": 39,
+      "color": "#20df52"
+    },
+    {
+      "kind": "circle",
+      "cx": 110,
+      "cy": 75,
+      "r": 23,
+      "color": "#20dddf"
+    }
+  ],
+  "seed": 1
+}

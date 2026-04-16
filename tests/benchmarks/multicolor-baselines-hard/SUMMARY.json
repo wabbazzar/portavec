@@ -1,0 +1,11 @@
+{
+  "runs": 120,
+  "lossMedian": 0.029153029003676112,
+  "lossMean": 0.06350175980672476,
+  "lossMin": 0.00003083067770837111,
+  "lossMax": 0.3684094859892142,
+  "paletteMatchMedian": 0.9921182765691632,
+  "coverageIoUMedian": 0.9455267541221868,
+  "kMatchRate": 0.175,
+  "generatedAt": "2026-04-16T16:56:01.768Z"
+}

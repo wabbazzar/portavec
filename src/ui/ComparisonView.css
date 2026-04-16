@@ -72,6 +72,94 @@
   object-fit: contain;
   image-rendering: pixelated;
   background-color: white;
+  transition: transform 120ms ease;
+}
+
+.image-canvas.svg-img {
+  image-rendering: auto;
+}
+
+.image-canvas {
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.panel-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.zoom-control {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.zoom-control label {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.zoom-control input[type=range] {
+  width: 80px;
+  height: 14px;
+  accent-color: var(--accent);
+}
+
+.zoom-value {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  color: var(--text-primary);
+  min-width: 32px;
+  text-align: right;
+}
+
+.zoom-reset {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+}
+.zoom-reset:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.copy-button {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+.copy-button:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.copy-button.ok {
+  color: #5eead4;
+  border-color: #5eead4;
+}
+.copy-button.err {
+  color: #ef4060;
+  border-color: #ef4060;
 }
 
 .svg-container {

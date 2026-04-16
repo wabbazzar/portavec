@@ -1,0 +1,51 @@
+{
+  "width": 256,
+  "height": 256,
+  "background": "#ffffff",
+  "palette": [
+    "#3a20df",
+    "#df2065",
+    "#c5df20",
+    "#20df9a"
+  ],
+  "shapes": [
+    {
+      "kind": "triangle",
+      "p1": {
+        "x": 26,
+        "y": 126
+      },
+      "p2": {
+        "x": 48,
+        "y": 136
+      },
+      "p3": {
+        "x": 46,
+        "y": 169
+      },
+      "color": "#3a20df"
+    },
+    {
+      "kind": "circle",
+      "cx": 167,
+      "cy": 154,
+      "r": 48,
+      "color": "#df2065"
+    },
+    {
+      "kind": "circle",
+      "cx": 91,
+      "cy": 201,
+      "r": 37,
+      "color": "#c5df20"
+    },
+    {
+      "kind": "circle",
+      "cx": 164,
+      "cy": 88,
+      "r": 47,
+      "color": "#20df9a"
+    }
+  ],
+  "seed": 5
+}

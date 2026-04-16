@@ -1,0 +1,92 @@
+{
+  "input": {
+    "seed": 2,
+    "colors": 2,
+    "shapeCount": 2,
+    "size": 256,
+    "allowOverlap": true,
+    "noise": "noisy"
+  },
+  "noise": "noisy",
+  "truth": {
+    "palette": [
+      "#6d20df",
+      "#92df20"
+    ],
+    "shapes": [
+      {
+        "kind": "circle",
+        "color": "#6d20df"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#92df20"
+      }
+    ]
+  },
+  "output": {
+    "k": 16,
+    "palette": [
+      "#fdfdfd",
+      "#6d20df",
+      "#92df21",
+      "#ebe2fa",
+      "#deccf7",
+      "#d9f4b2",
+      "#bfed7c",
+      "#e9f8d3",
+      "#ad81ed",
+      "#823de4",
+      "#a8e64f",
+      "#cbb3f3",
+      "#d3f4a1",
+      "#bc9af0",
+      "#9e6bea",
+      "#8d53e7"
+    ],
+    "layerPixelCounts": [
+      55777,
+      5472,
+      2193,
+      254,
+      154,
+      83,
+      195,
+      205,
+      128,
+      191,
+      195,
+      140,
+      131,
+      147,
+      121,
+      150
+    ],
+    "svgByteLength": 54644
+  },
+  "loss": {
+    "paletteMatch": 0.9979468306728877,
+    "coverageIoU": 0.8721459990029425,
+    "centroidError": 0.00014791437155614094,
+    "loss": 0.06476305966652918,
+    "matches": [
+      1,
+      2
+    ],
+    "perShape": [
+      {
+        "truthColor": "#6d20df",
+        "matchedColor": "#6d20df",
+        "iou": 0.8982271831910703,
+        "centroidDistPx": 0.06595424865722521
+      },
+      {
+        "truthColor": "#92df20",
+        "matchedColor": "#92df21",
+        "iou": 0.8460648148148148,
+        "centroidDistPx": 0.04114719662896369
+      }
+    ]
+  },
+  "timingMs": 593.5545330000004
+}

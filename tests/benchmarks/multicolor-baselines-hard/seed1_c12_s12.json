@@ -1,0 +1,206 @@
+{
+  "input": {
+    "seed": 1,
+    "colors": 12,
+    "shapeCount": 12,
+    "size": 256,
+    "allowOverlap": true,
+    "noise": "clean"
+  },
+  "noise": "clean",
+  "truth": {
+    "palette": [
+      "#204ddf",
+      "#5220df",
+      "#b220df",
+      "#df20ad",
+      "#df204d",
+      "#df5220",
+      "#dfb220",
+      "#addf20",
+      "#4ddf20",
+      "#20df52",
+      "#20dfb2",
+      "#20addf"
+    ],
+    "shapes": [
+      {
+        "kind": "circle",
+        "color": "#204ddf"
+      },
+      {
+        "kind": "circle",
+        "color": "#5220df"
+      },
+      {
+        "kind": "triangle",
+        "color": "#b220df"
+      },
+      {
+        "kind": "circle",
+        "color": "#df20ad"
+      },
+      {
+        "kind": "circle",
+        "color": "#df204d"
+      },
+      {
+        "kind": "triangle",
+        "color": "#df5220"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#dfb220"
+      },
+      {
+        "kind": "circle",
+        "color": "#addf20"
+      },
+      {
+        "kind": "circle",
+        "color": "#4ddf20"
+      },
+      {
+        "kind": "circle",
+        "color": "#20df52"
+      },
+      {
+        "kind": "circle",
+        "color": "#20dfb2"
+      },
+      {
+        "kind": "circle",
+        "color": "#20addf"
+      }
+    ]
+  },
+  "output": {
+    "k": 13,
+    "palette": [
+      "#ffffff",
+      "#4ddf20",
+      "#df204d",
+      "#b220df",
+      "#20dfb2",
+      "#20addf",
+      "#dfb220",
+      "#df20ad",
+      "#addf20",
+      "#204ddf",
+      "#20df52",
+      "#df5220",
+      "#dfdfb2"
+    ],
+    "layerPixelCounts": [
+      53631,
+      2292,
+      448,
+      209,
+      3228,
+      2134,
+      892,
+      689,
+      954,
+      501,
+      540,
+      9,
+      9
+    ],
+    "svgByteLength": 6124
+  },
+  "loss": {
+    "paletteMatch": 0.9166666666666666,
+    "coverageIoU": 0.8752918709816417,
+    "centroidError": 0.08346823392738519,
+    "loss": 0.10403422123525097,
+    "matches": [
+      9,
+      0,
+      3,
+      7,
+      2,
+      11,
+      6,
+      8,
+      1,
+      10,
+      4,
+      5
+    ],
+    "perShape": [
+      {
+        "truthColor": "#204ddf",
+        "matchedColor": "#204ddf",
+        "iou": 0.9881656804733728,
+        "centroidDistPx": 0.1614069404236889
+      },
+      {
+        "truthColor": "#5220df",
+        "matchedColor": "#ffffff",
+        "iou": 0,
+        "centroidDistPx": 362.03867196751236
+      },
+      {
+        "truthColor": "#b220df",
+        "matchedColor": "#b220df",
+        "iou": 0.9675925925925926,
+        "centroidDistPx": 0.054155232921868746
+      },
+      {
+        "truthColor": "#df20ad",
+        "matchedColor": "#df20ad",
+        "iou": 0.9956647398843931,
+        "centroidDistPx": 0.06125589012518176
+      },
+      {
+        "truthColor": "#df204d",
+        "matchedColor": "#df204d",
+        "iou": 1,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#df5220",
+        "matchedColor": "#df5220",
+        "iou": 0.5625,
+        "centroidDistPx": 0.21695137988628665
+      },
+      {
+        "truthColor": "#dfb220",
+        "matchedColor": "#dfb220",
+        "iou": 0.9955357142857143,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#addf20",
+        "matchedColor": "#addf20",
+        "iou": 0.9968553459119497,
+        "centroidDistPx": 0.05115751999968197
+      },
+      {
+        "truthColor": "#4ddf20",
+        "matchedColor": "#4ddf20",
+        "iou": 1,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#20df52",
+        "matchedColor": "#20df52",
+        "iou": 1,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#20dfb2",
+        "matchedColor": "#20dfb2",
+        "iou": 1,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#20addf",
+        "matchedColor": "#20addf",
+        "iou": 0.9971883786316776,
+        "centroidDistPx": 0.041143819661215233
+      }
+    ]
+  },
+  "timingMs": 410.1304689999997
+}

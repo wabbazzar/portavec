@@ -1,0 +1,35 @@
+{
+  "width": 256,
+  "height": 256,
+  "background": "#ffffff",
+  "palette": [
+    "#3a20df",
+    "#c5df20"
+  ],
+  "shapes": [
+    {
+      "kind": "triangle",
+      "p1": {
+        "x": 28,
+        "y": 116
+      },
+      "p2": {
+        "x": 59,
+        "y": 130
+      },
+      "p3": {
+        "x": 56,
+        "y": 176
+      },
+      "color": "#3a20df"
+    },
+    {
+      "kind": "circle",
+      "cx": 157,
+      "cy": 147,
+      "r": 68,
+      "color": "#c5df20"
+    }
+  ],
+  "seed": 5
+}

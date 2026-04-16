@@ -75,6 +75,15 @@ export function ParameterControls() {
           onChange={(v) => updateParameter('minPathLength', v)}
           displayValue={`${parameters.minPathLength}px`}
         />
+        <Slider
+          label="Colors"
+          value={parameters.colors}
+          min={0}
+          max={16}
+          step={1}
+          onChange={(v) => updateParameter('colors', v)}
+          displayValue={parameters.colors === 0 ? 'auto' : String(parameters.colors)}
+        />
       </div>
     </div>
   );

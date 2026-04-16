@@ -1,0 +1,286 @@
+{
+  "input": {
+    "seed": 4,
+    "colors": 16,
+    "shapeCount": 16,
+    "size": 256,
+    "allowOverlap": true,
+    "noise": "aa_noisy"
+  },
+  "noise": "aa_noisy",
+  "truth": {
+    "palette": [
+      "#df2078",
+      "#df2030",
+      "#df5820",
+      "#df9f20",
+      "#d7df20",
+      "#8fdf20",
+      "#48df20",
+      "#20df40",
+      "#20df87",
+      "#20dfcf",
+      "#20a7df",
+      "#2060df",
+      "#2820df",
+      "#7020df",
+      "#b720df",
+      "#df20bf"
+    ],
+    "shapes": [
+      {
+        "kind": "circle",
+        "color": "#df2078"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#df2030"
+      },
+      {
+        "kind": "triangle",
+        "color": "#df5820"
+      },
+      {
+        "kind": "triangle",
+        "color": "#df9f20"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#d7df20"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#8fdf20"
+      },
+      {
+        "kind": "circle",
+        "color": "#48df20"
+      },
+      {
+        "kind": "circle",
+        "color": "#20df40"
+      },
+      {
+        "kind": "triangle",
+        "color": "#20df87"
+      },
+      {
+        "kind": "triangle",
+        "color": "#20dfcf"
+      },
+      {
+        "kind": "triangle",
+        "color": "#20a7df"
+      },
+      {
+        "kind": "triangle",
+        "color": "#2060df"
+      },
+      {
+        "kind": "triangle",
+        "color": "#2820df"
+      },
+      {
+        "kind": "triangle",
+        "color": "#7020df"
+      },
+      {
+        "kind": "triangle",
+        "color": "#b720df"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#df20bf"
+      }
+    ]
+  },
+  "output": {
+    "k": 29,
+    "palette": [
+      "#fefefe",
+      "#c656e8",
+      "#49e021",
+      "#df2131",
+      "#e02279",
+      "#86eda0",
+      "#e1a225",
+      "#77ec71",
+      "#42e5d5",
+      "#32ace2",
+      "#eac0e7",
+      "#d8e021",
+      "#eb8560",
+      "#90e022",
+      "#2c26e0",
+      "#3365e3",
+      "#df21c0",
+      "#7224e1",
+      "#9360eb",
+      "#f0cd84",
+      "#ccf4cd",
+      "#25e088",
+      "#21e041",
+      "#e15a23",
+      "#ab9df0",
+      "#eb66a1",
+      "#f4d3bc",
+      "#b9e2f3",
+      "#b823e1"
+    ],
+    "layerPixelCounts": [
+      59595,
+      15,
+      1209,
+      320,
+      594,
+      44,
+      214,
+      74,
+      83,
+      103,
+      55,
+      284,
+      20,
+      272,
+      102,
+      63,
+      479,
+      90,
+      18,
+      26,
+      38,
+      164,
+      1219,
+      113,
+      41,
+      22,
+      36,
+      46,
+      197
+    ],
+    "svgByteLength": 15896
+  },
+  "loss": {
+    "paletteMatch": 0.9780179583362881,
+    "coverageIoU": 0.8982344081812245,
+    "centroidError": 0.004943832728100507,
+    "loss": 0.06016999584768257,
+    "matches": [
+      4,
+      3,
+      23,
+      6,
+      11,
+      13,
+      2,
+      22,
+      21,
+      8,
+      9,
+      15,
+      14,
+      17,
+      28,
+      16
+    ],
+    "perShape": [
+      {
+        "truthColor": "#df2078",
+        "matchedColor": "#e02279",
+        "iou": 0.9642857142857143,
+        "centroidDistPx": 0.07309189678819202
+      },
+      {
+        "truthColor": "#df2030",
+        "matchedColor": "#df2131",
+        "iou": 0.9876543209876543,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#df5820",
+        "matchedColor": "#e15a23",
+        "iou": 0.8071428571428572,
+        "centroidDistPx": 0.28744664057464486
+      },
+      {
+        "truthColor": "#df9f20",
+        "matchedColor": "#e1a225",
+        "iou": 0.8991596638655462,
+        "centroidDistPx": 0.22035701022311163
+      },
+      {
+        "truthColor": "#d7df20",
+        "matchedColor": "#d8e021",
+        "iou": 0.9861111111111112,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#8fdf20",
+        "matchedColor": "#90e022",
+        "iou": 0.9855072463768116,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#48df20",
+        "matchedColor": "#49e021",
+        "iou": 0.9656,
+        "centroidDistPx": 0.058827572689234796
+      },
+      {
+        "truthColor": "#20df40",
+        "matchedColor": "#21e041",
+        "iou": 0.9612954186413902,
+        "centroidDistPx": 0.11404412039779595
+      },
+      {
+        "truthColor": "#20df87",
+        "matchedColor": "#25e088",
+        "iou": 0.8315789473684211,
+        "centroidDistPx": 1.0023986230524022
+      },
+      {
+        "truthColor": "#20dfcf",
+        "matchedColor": "#42e5d5",
+        "iou": 0.9195402298850575,
+        "centroidDistPx": 1.8562310752191902
+      },
+      {
+        "truthColor": "#20a7df",
+        "matchedColor": "#32ace2",
+        "iou": 0.853448275862069,
+        "centroidDistPx": 8.973671352278783
+      },
+      {
+        "truthColor": "#2060df",
+        "matchedColor": "#3365e3",
+        "iou": 0.6987951807228916,
+        "centroidDistPx": 15.53240392394784
+      },
+      {
+        "truthColor": "#2820df",
+        "matchedColor": "#2c26e0",
+        "iou": 0.8360655737704918,
+        "centroidDistPx": 0.23333830167468178
+      },
+      {
+        "truthColor": "#7020df",
+        "matchedColor": "#7224e1",
+        "iou": 0.7964601769911505,
+        "centroidDistPx": 0.0376012031836984
+      },
+      {
+        "truthColor": "#b720df",
+        "matchedColor": "#b823e1",
+        "iou": 0.8873873873873874,
+        "centroidDistPx": 0.24832644494693132
+      },
+      {
+        "truthColor": "#df20bf",
+        "matchedColor": "#df21c0",
+        "iou": 0.9917184265010351,
+        "centroidDistPx": 0
+      }
+    ]
+  },
+  "timingMs": 393.2568709999978
+}

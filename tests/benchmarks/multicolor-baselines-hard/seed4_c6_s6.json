@@ -1,0 +1,124 @@
+{
+  "input": {
+    "seed": 4,
+    "colors": 6,
+    "shapeCount": 6,
+    "size": 256,
+    "allowOverlap": true,
+    "noise": "clean"
+  },
+  "noise": "clean",
+  "truth": {
+    "palette": [
+      "#df2078",
+      "#df8720",
+      "#78df20",
+      "#20df87",
+      "#2078df",
+      "#8720df"
+    ],
+    "shapes": [
+      {
+        "kind": "circle",
+        "color": "#df2078"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#df8720"
+      },
+      {
+        "kind": "triangle",
+        "color": "#78df20"
+      },
+      {
+        "kind": "triangle",
+        "color": "#20df87"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#2078df"
+      },
+      {
+        "kind": "rectangle",
+        "color": "#8720df"
+      }
+    ]
+  },
+  "output": {
+    "k": 8,
+    "palette": [
+      "#ffffff",
+      "#df2078",
+      "#78df20",
+      "#8720df",
+      "#20df87",
+      "#df8720",
+      "#2078df",
+      "#87dfdf"
+    ],
+    "layerPixelCounts": [
+      60209,
+      1804,
+      366,
+      776,
+      671,
+      896,
+      806,
+      8
+    ],
+    "svgByteLength": 3231
+  },
+  "loss": {
+    "paletteMatch": 1,
+    "coverageIoU": 0.9934162362196117,
+    "centroidError": 0.000003495457599189639,
+    "loss": 0.0032922314359540295,
+    "matches": [
+      1,
+      5,
+      2,
+      4,
+      6,
+      3
+    ],
+    "perShape": [
+      {
+        "truthColor": "#df2078",
+        "matchedColor": "#df2078",
+        "iou": 1,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#df8720",
+        "matchedColor": "#df8720",
+        "iou": 0.9955555555555555,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#78df20",
+        "matchedColor": "#78df20",
+        "iou": 0.9838709677419355,
+        "centroidDistPx": 0.005200817377731089
+      },
+      {
+        "truthColor": "#20df87",
+        "matchedColor": "#20df87",
+        "iou": 0.9911373707533235,
+        "centroidDistPx": 0.002392127585045106
+      },
+      {
+        "truthColor": "#2078df",
+        "matchedColor": "#2078df",
+        "iou": 0.9950617283950617,
+        "centroidDistPx": 0
+      },
+      {
+        "truthColor": "#8720df",
+        "matchedColor": "#8720df",
+        "iou": 0.9948717948717949,
+        "centroidDistPx": 0
+      }
+    ]
+  },
+  "timingMs": 425.5259900000019
+}

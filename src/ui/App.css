@@ -47,14 +47,23 @@
   overflow: hidden;
 }
 
-.upload-section {
+.landing {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  overflow-y: auto;
+  padding-bottom: 8px;
+}
+
+.upload-section {
   display: flex;
   align-items: center;
   justify-content: center;
   max-width: 600px;
   margin: 0 auto;
   width: 100%;
+  padding-top: 24px;
 }
 
 .toolbar {

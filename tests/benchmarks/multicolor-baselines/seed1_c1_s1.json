@@ -1,0 +1,49 @@
+{
+  "input": {
+    "seed": 1,
+    "colors": 1,
+    "shapeCount": 1,
+    "size": 128
+  },
+  "truth": {
+    "palette": [
+      "#204ddf"
+    ],
+    "shapes": [
+      {
+        "kind": "circle",
+        "color": "#204ddf"
+      }
+    ]
+  },
+  "output": {
+    "k": 2,
+    "palette": [
+      "#ffffff",
+      "#204ddf"
+    ],
+    "layerPixelCounts": [
+      14720,
+      1664
+    ],
+    "svgByteLength": 537
+  },
+  "loss": {
+    "paletteMatch": 1,
+    "coverageIoU": 1,
+    "centroidError": 0,
+    "loss": 0,
+    "matches": [
+      1
+    ],
+    "perShape": [
+      {
+        "truthColor": "#204ddf",
+        "matchedColor": "#204ddf",
+        "iou": 1,
+        "centroidDistPx": 0
+      }
+    ]
+  },
+  "timingMs": 41.501768999999996
+}

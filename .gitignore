@@ -15,16 +15,8 @@ tsconfig.tsbuildinfo
 .DS_Store
 Thumbs.db
 
-# Ralph session files
-.call_count
-.circuit_breaker_history
-.circuit_breaker_state
-.exit_signals
-.last_reset
-.ralph_session
-progress.json
-status.json
-logs/
-
 # Test coverage
 coverage/
+
+# Legacy autonomous-loop artifacts (do not resurrect)
+logs/

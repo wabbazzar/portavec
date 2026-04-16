@@ -1,0 +1,11 @@
+{
+  "runs": 9,
+  "lossMedian": 0,
+  "lossMean": 0,
+  "lossMin": 0,
+  "lossMax": 0,
+  "paletteMatchMedian": 1,
+  "coverageIoUMedian": 1,
+  "kMatchRate": 1,
+  "generatedAt": "2026-04-15T20:23:34.972Z"
+}
