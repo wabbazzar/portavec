@@ -1,64 +1,41 @@
 {
-  "iter": 8,
+  "iter": 9,
   "note": "Self-improving loop: improve multicolor pipeline for 20-30 color images; target hw_forest_cat quality.",
   "baseline": {
-    "n20_clean": 0.015,
-    "n20_noisy": 0.388,
-    "n24_clean": 0.097,
-    "n24_noisy": 0.530,
+    "global_median": 0.2325,
     "n30_clean": 0.104,
-    "n30_noisy": 0.656,
-    "global_median": 0.2325
+    "n30_noisy": 0.656
   },
   "current": {
     "global_median": 0.1899,
-    "global_mean": 0.2569,
-    "paletteMatchMedian": 0.8475,
-    "coverageIoUMedian": 0.7542,
-    "kMatchRate": 0.611,
-    "max_loss": 0.653
+    "delta_vs_baseline": -0.0426,
+    "delta_pct": -18.3
   },
   "best": {
+    "config": "mergeThreshold=4, saliencyWeight=1 (all other defaults)",
     "global_median": 0.1899,
-    "delta_vs_baseline": -0.0426,
     "delta_pct": -18.3
   },
   "kept_changes": [
     { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "delta_pct": -4.6 },
     { "iter": 7, "param": "mergeThreshold", "from": 6, "to": 4, "delta_pct": -11.2 },
-    { "iter": 8, "param": "saliencyWeight", "from": 0, "to": 1, "delta_pct": -3.6, "combined_with": "mergeThreshold=4" }
+    { "iter": 8, "param": "saliencyWeight", "from": 0, "to": 1, "delta_pct": -3.6 }
   ],
-  "tried": [
-    { "iter": 2, "param": "mergeThreshold", "from": 8, "to": 14, "kept": false },
-    { "iter": 2, "param": "denoiseRadius", "from": 1, "to": 2, "kept": false },
-    { "iter": 3, "param": "minClusterFraction", "from": 0, "to": 0.002, "kept": false },
-    { "iter": 3, "param": "autoKStrategy", "from": "merge", "to": "silhouette", "kept": false },
-    { "iter": 4, "param": "restarts", "from": 5, "to": 12, "kept": false },
-    { "iter": 4, "param": "denoisePasses", "from": 2, "to": 3, "kept": false },
-    { "iter": 4, "param": "autoKStrategy", "from": "merge", "to": "elbow", "kept": false },
-    { "iter": 5, "param": "saliencyWeight", "from": 0, "to": 1, "at_mt": 8, "kept": false, "note": "rejected at mt=8 because clean cells had no slack; now kept when combined with mt=4." },
-    { "iter": 6, "param": "minClusterFraction", "from": 0, "to": 0.0005, "kept": false },
-    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "kept": true, "delta_pct": -4.6 },
-    { "iter": 7, "param": "mergeThreshold", "from": 6, "to": 4, "kept": true, "delta_pct": -11.2 },
-    { "iter": 7, "param": "mergeThreshold", "from": 4, "to": 2, "kept": false, "note": "bit-identical to mt=4" },
-    { "iter": 8, "param": "denoiseRadius", "from": 1, "to": 2, "at_mt": 4, "kept": false, "note": "still +18%; combination doesn't rescue denoise" },
-    { "iter": 8, "param": "saliencyWeight", "from": 0, "to": 1, "at_mt": 4, "kept": true, "delta_pct": -3.6, "note": "saliency bias becomes net-positive when clean cells have slack from mt=4" }
+  "iter_9_probes": [
+    { "param": "saliencyWeight", "from": 1, "to": 2, "delta_pct": 3.3, "result": "regresses; sal=1 is the sweet spot", "kept": false },
+    { "param": "restarts", "from": 5, "to": 8, "delta_pct": 7.7, "result": "more restarts hurt under saliency init — exploring worse starts", "kept": false },
+    { "param": "denoisePasses", "from": 2, "to": 3, "delta_pct": 2.7, "result": "borderline — max improved (0.641 vs 0.653), palette +0.2pp, but median over threshold. Reverted.", "kept": false }
   ],
   "forest_cat_renders": [
-    { "iter": 0, "mergeThreshold": 8, "saliencyWeight": 0, "uniqueFills": 30, "paths": 8273 },
-    { "iter": "7_mt4", "mergeThreshold": 4, "saliencyWeight": 0, "uniqueFills": 30, "paths": 8273, "note": "unchanged vs iter0" },
-    { "iter": "8_mt4_sal1", "mergeThreshold": 4, "saliencyWeight": 1, "uniqueFills": 30, "paths": 8438, "note": "FIRST measurable forest_cat change: +165 paths (+2%) from saliency-weighted init picking different cluster centers" }
+    { "iter": 0, "config": "mt=8, sal=0", "paths": 8273 },
+    { "iter": "8_mt4_sal1", "config": "mt=4, sal=1 (current best)", "paths": 8438, "delta_pct": 2.0 }
   ],
   "observations": [
-    "3 kept changes total: mt 8→6→4, saliency 0→1. Global median 0.2325→0.1899 (-18.3%).",
-    "Key finding: single probes are order-dependent. saliencyWeight failed at mt=8 (iter 5) because clean cells already at their limit; kept at mt=4 because clean cells have slack. Future probing should re-test rejected probes after each kept change.",
-    "Forest cat finally shifted: 8273→8438 paths (+2%) from the saliency-weighted init. Visual comparison needed to judge if tree-doors improve — path count is a coarse proxy.",
-    "Max loss dropped meaningfully: 0.697 → 0.653. The worst noisy cell is getting slightly better without the clean cells regressing."
+    "Re-testing previously-rejected probes under the new best config (mt=4, sal=1) confirmed sal=1 is a local optimum. Higher saliency overshoots; more restarts hurt with salency init; extra denoise passes are borderline.",
+    "denoisePasses=3 is ambiguous: median slightly worse (+2.7%) but max meaningfully better (-1.8%) and paletteMatch +0.2pp. If the primary concern were worst-case loss rather than median, this would be kept.",
+    "Parameter space is well-explored. Remaining untried: mergeThreshold=10, minClusterFraction=0.001, autoKStrategy=silhouette at new config, restarts=12 at new config. All unlikely to yield on past patterns.",
+    "Next productive direction: re-examine the iter-2 denoiseRadius=2 result under mt=4+sal=1. That was rejected at mt=8 but order-dependency keeps surprising."
   ],
-  "exit_status": {
-    "n30_clean_15pct": "ACHIEVED (-76% at mt=4; likely similar or better with saliency)",
-    "forest_cat_distinct": "PARTIAL (paths changed +2%; needs visual inspection of tree-door region)",
-    "nokept_streak": 0
-  },
-  "next_probe": "Re-test previously-rejected probes under the new best config (mt=4, sal=1): denoisePasses, restarts, autoKStrategy silhouette."
+  "nokept_streak": 1,
+  "next_probe": "denoiseRadius 1→2 under mt=4+sal=1 (third order-dependent re-test)"
 }
