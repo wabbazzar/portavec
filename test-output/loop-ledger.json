@@ -1,5 +1,5 @@
 {
-  "iter": 4,
+  "iter": 5,
   "note": "Self-improving loop: improve multicolor pipeline for 20-30 color images; target hw_forest_cat quality.",
   "baseline": {
     "n20_clean": 0.015,
@@ -28,26 +28,38 @@
   "tried": [
     { "iter": 2, "param": "mergeThreshold", "from": 8, "to": 14, "result": "bit-identical", "kept": false },
     { "iter": 2, "param": "denoiseRadius", "from": 1, "to": 2, "delta_global_median": 0.033, "result": "noisy -9% but clean +15% globally", "kept": false },
-    { "iter": 3, "param": "minClusterFraction", "from": 0, "to": 0.002, "delta_global_median": 0.239, "result": "global +103%; dissolves genuine small shapes", "kept": false },
+    { "iter": 3, "param": "minClusterFraction", "from": 0, "to": 0.002, "delta_global_median": 0.239, "result": "global +103%", "kept": false },
     { "iter": 3, "param": "autoKStrategy", "from": "merge", "to": "silhouette", "delta_global_median": 0.081, "result": "global +35%", "kept": false },
-    { "iter": 4, "param": "restarts", "from": 5, "to": 12, "delta_global_median": 0.001, "result": "flat (+0.5%); below 2% keep threshold", "kept": false },
-    { "iter": 4, "param": "denoisePasses", "from": 2, "to": 3, "delta_global_median": 0.008, "result": "+3.4% regression", "kept": false },
-    { "iter": 4, "param": "autoKStrategy", "from": "merge", "to": "elbow", "delta_global_median": 0.081, "result": "identical to silhouette — code paths converge", "kept": false }
+    { "iter": 4, "param": "restarts", "from": 5, "to": 12, "delta_global_median": 0.001, "result": "flat (+0.5%)", "kept": false },
+    { "iter": 4, "param": "denoisePasses", "from": 2, "to": 3, "delta_global_median": 0.008, "result": "+3.4%", "kept": false },
+    { "iter": 4, "param": "autoKStrategy", "from": "merge", "to": "elbow", "delta_global_median": 0.081, "result": "identical to silhouette", "kept": false },
+    {
+      "iter": 5,
+      "param": "saliencyWeight (new option)",
+      "from": 0,
+      "to": 1,
+      "delta_global_median": 0.008,
+      "result": "synthetic +3.5%. Forest cat palette analysis at w=0,1,2,4 shows measurable cluster-pick differences but no new color families. Doors likely are painted-wood (brown range), k-means will always cluster with bark regardless of saturation bias. Kept as an OPTION (default=0, no regression) for future use.",
+      "kept": "code-only"
+    }
   ],
   "forest_cat_renders": [
-    { "iter": 0,  "k": 30, "uniqueFills": 30, "paths": 8273,  "svgBytes": 1692714, "ms": 8496 },
-    { "iter": 20, "k": 20, "uniqueFills": 20, "paths": 6865,  "svgBytes": 1426258, "ms": 6107 },
-    { "iter": 30, "k": 30, "uniqueFills": 30, "paths": 8273,  "svgBytes": 1692714, "ms": 9582 },
-    { "iter": 40, "k": 40, "uniqueFills": 40, "paths": 10029, "svgBytes": 2012618, "ms": 13279 },
-    { "iter": 50, "k": 50, "uniqueFills": 50, "paths": 11743, "svgBytes": 2335558, "ms": 16123 }
+    { "iter": 0,  "k": 30, "sal": 0, "uniqueFills": 30, "paths": 8273, "svgBytes": 1692714, "ms": 8496 },
+    { "iter": 20, "k": 20, "sal": 0, "uniqueFills": 20, "paths": 6865, "svgBytes": 1426258, "ms": 6107 },
+    { "iter": 40, "k": 40, "sal": 0, "uniqueFills": 40, "paths": 10029, "svgBytes": 2012618, "ms": 13279 },
+    { "iter": 50, "k": 50, "sal": 0, "uniqueFills": 50, "paths": 11743, "svgBytes": 2335558, "ms": 16123 },
+    { "iter": "5_sal0", "k": 30, "sal": 0, "uniqueFills": 30, "paths": 8273, "ms": 15834 },
+    { "iter": "5_sal1", "k": 30, "sal": 1, "uniqueFills": 30, "paths": 8438, "ms": 8458 },
+    { "iter": "5_sal2", "k": 30, "sal": 2, "uniqueFills": 30, "paths": 8420, "ms": 8641 },
+    { "iter": "5_sal4", "k": 30, "sal": 4, "uniqueFills": 30, "paths": 8309, "ms": 8531 }
   ],
   "observations": [
-    "7 param probes across 3 iters, 0 kept. Current defaults (maxK=32, restarts=5, merge, denoiseRadius=1, denoisePasses=2, mergeThreshold=8, minClusterFraction=0) are near-optimal for the synthetic benchmark.",
-    "autoKStrategy 'elbow' === 'silhouette' in practice (identical sweep output). The three-way knob is effectively two-way (merge vs not-merge).",
-    "restarts 5→12 costs ~2.4x CPU for +0.5% loss. Not worth it.",
-    "Forest-cat k-sweep: higher k adds color-family GRADES (more brown/orange shades) but no new COLOR FAMILIES. Tree doors are absorbed by bark regardless of k.",
-    "Plateau diagnosis: single-param tuning cannot fix salient-color loss. Next productive step is algorithmic — saturation-weighted k-means pre-pass OR a pre-quantize pass that reserves cluster budget for high-chroma minority pixels."
+    "7 synthetic-median param probes rejected; 1 algorithmic extension (saliency-weighted k-means++ init) added as off-by-default option.",
+    "Palette analysis across sal=0,1,2,4 on forest_cat: path counts shift 8273→8438→8420→8309, showing init differences. But the color FAMILIES stay stable (same teal/brown/orange/yellow clusters).",
+    "Confirmation of iter-3 finding: forest_cat tree doors are probably painted wood in the brown range, not saturated colors that saliency can pull out. k-means on frequency is picking the right thing; the 'washed out' complaint is about insufficient brown/bark gradation, not missing color families.",
+    "Counter-intuitive implication: the fix may be simpler than algorithmic — just bumping k higher (50+) for forest cat specifically, since higher k refines the dominant brown range (where doors live).",
+    "synthetic oracle cannot guide forest-cat tuning — per-image settings are needed, not global defaults."
   ],
   "nokept_streak": 4,
-  "recommendation": "Pause loop; open a slice for salient-color-preserving quantization in specs/tickets/. Single-param probes are exhausted in the productive candidate list."
+  "recommendation": "Loop has exhausted productive single-param tuning. Three forward options: (a) PAUSE and open a slice for per-image opt config (forest_cat uses k=50, default stays k=auto); (b) PAUSE and open a slice for true salient quantization (spatial-outlier detection, not chroma-only); (c) CONTINUE to 10/10 plateau on remaining low-value probes."
 }

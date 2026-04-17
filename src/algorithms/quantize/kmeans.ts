@@ -31,6 +31,16 @@ export interface QuantizeOptions {
    * mitigate bad k-means++ initializations on noisy data.
    */
   restarts?: number;
+  /**
+   * Saliency bias for k-means++ initialization. When > 0, high-chroma
+   * (saturated) pixels get a proportionally higher probability of being
+   * picked as initial cluster centers. 0 = vanilla k-means++ (distance
+   * only). 1 = pure chroma doubles pick probability for max-saturation
+   * pixels. Helps preserve rare salient colors that would otherwise be
+   * absorbed by frequent muted surroundings (e.g., painted doors in a
+   * photo dominated by bark tones). Default 0.
+   */
+  saliencyWeight?: number;
 }
 
 // Simple seeded PRNG here so kmeans.ts has no ground-truth dependency.
@@ -127,7 +137,7 @@ export function quantize(imageData: ImageData, opts: QuantizeOptions): QuantizeR
 }
 
 function quantizeOnce(imageData: ImageData, opts: QuantizeOptions): QuantizeResult {
-  const { k, seed, maxIters = 25, sampleStride = 1 } = opts;
+  const { k, seed, maxIters = 25, sampleStride = 1, saliencyWeight = 0 } = opts;
   const N = imageData.width * imageData.height;
   const rand = mulberry32(seed);
 
@@ -145,6 +155,17 @@ function quantizeOnce(imageData: ImageData, opts: QuantizeOptions): QuantizeResu
   const sampleIdx: number[] = [];
   for (let i = 0; i < N; i += sampleStride) sampleIdx.push(i);
 
+  // Precompute per-sample chroma (Lab a/b magnitude) if saliency bias is on.
+  // Normalized by 128 — typical max |a|, |b| is ~100–128 for saturated colors.
+  const chroma = saliencyWeight > 0 ? new Float64Array(sampleIdx.length) : null;
+  if (chroma != null) {
+    for (let si = 0; si < sampleIdx.length; si++) {
+      const lab = labs[sampleIdx[si]!]!;
+      const c = Math.sqrt(lab[1] * lab[1] + lab[2] * lab[2]) / 128;
+      chroma[si] = Math.min(1, c);
+    }
+  }
+
   // --- k-means++ initialization ---
   const centroids: Array<[number, number, number]> = [];
   const first = sampleIdx[Math.floor(rand() * sampleIdx.length)]!;
@@ -160,8 +181,12 @@ function quantizeOnce(imageData: ImageData, opts: QuantizeOptions): QuantizeResu
         const d = sqDist(lab, c);
         if (d < best) best = d;
       }
-      dist[si] = best;
-      total += best;
+      // Saliency bias: scale selection weight by (1 + w * chroma), so rare
+      // high-chroma pixels are more likely to be seeded as centers even
+      // when dominant muted colors are geometrically farther.
+      const w = chroma != null ? best * (1 + saliencyWeight * chroma[si]!) : best;
+      dist[si] = w;
+      total += w;
     }
     if (total === 0) {
       // All remaining points coincide with existing centroid — duplicate last.

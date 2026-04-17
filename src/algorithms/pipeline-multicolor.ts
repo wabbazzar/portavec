@@ -84,6 +84,13 @@ export interface MultiColorOptions {
   minContourLength?: number;
   simplifyTolerance?: number;
   curveTolerance?: number;
+  /**
+   * k-means++ saliency bias. When > 0, high-chroma pixels are more
+   * likely to be picked as initial cluster centers, preserving rare
+   * saturated colors (e.g., painted details) that would otherwise be
+   * absorbed by dominant muted surroundings. 0 = vanilla k-means++.
+   */
+  saliencyWeight?: number;
 }
 
 export interface ColorLayer {
@@ -108,7 +115,7 @@ export interface MultiColorResult {
 }
 
 const DEFAULT_OPTS: Required<Pick<MultiColorOptions,
-  'seed' | 'maxK' | 'denoiseRadius' | 'denoisePasses' | 'restarts' | 'autoKStrategy' | 'mergeThreshold' | 'minClusterFraction' | 'gradientCoupleThreshold' | 'gradientCoupleDeMax' | 'minContourLength' | 'simplifyTolerance' | 'curveTolerance'
+  'seed' | 'maxK' | 'denoiseRadius' | 'denoisePasses' | 'restarts' | 'autoKStrategy' | 'mergeThreshold' | 'minClusterFraction' | 'gradientCoupleThreshold' | 'gradientCoupleDeMax' | 'minContourLength' | 'simplifyTolerance' | 'curveTolerance' | 'saliencyWeight'
 >> = {
   seed: 17,
   maxK: 32,
@@ -126,6 +133,7 @@ const DEFAULT_OPTS: Required<Pick<MultiColorOptions,
   minContourLength: 3,
   simplifyTolerance: 0.3,
   curveTolerance: 1.2,
+  saliencyWeight: 0,
 };
 
 export function runMultiColorPipeline(
@@ -156,6 +164,7 @@ export function runMultiColorPipeline(
       seed: opts.seed,
       sampleStride: opts.sampleStride,
       restarts: opts.restarts,
+      saliencyWeight: opts.saliencyWeight,
     });
   } else if (opts.autoKStrategy === 'merge') {
     // Over-cluster then merge close centers in Lab. Robust on noisy
@@ -165,6 +174,7 @@ export function runMultiColorPipeline(
       seed: opts.seed,
       sampleStride: opts.sampleStride,
       restarts: opts.restarts,
+      saliencyWeight: opts.saliencyWeight,
     });
     const merged = mergeNearClusters(initial, {
       mergeThreshold: opts.mergeThreshold,
@@ -190,6 +200,7 @@ export function runMultiColorPipeline(
       maxK: opts.maxK,
       sampleStride: opts.sampleStride,
       restarts: opts.restarts,
+      saliencyWeight: opts.saliencyWeight,
     });
     k = auto.k;
     wcssByK = auto.wcssByK;

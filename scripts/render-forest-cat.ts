@@ -25,14 +25,19 @@ function pngToImageData(buf: Buffer): ImageData {
 }
 
 function main(): void {
-  const iter = Number(process.argv[2] ?? '0');
+  const iter = process.argv[2] ?? '0';
   const kArg = process.argv[3];
+  const salArg = process.argv[4];
   const k = kArg != null ? Number(kArg) : undefined;
+  const saliencyWeight = salArg != null ? Number(salArg) : undefined;
 
   const pngBuf = readFileSync('public/training/hw_forest_cat.png');
   const img = pngToImageData(pngBuf);
+  const opts: Record<string, number> = {};
+  if (k != null) opts.k = k;
+  if (saliencyWeight != null) opts.saliencyWeight = saliencyWeight;
   const t0 = Date.now();
-  const result = runMultiColorPipeline(img, k != null ? { k } : {});
+  const result = runMultiColorPipeline(img, opts);
   const ms = Date.now() - t0;
 
   const outPath = `test-output/hw_forest_cat_iter${iter}.svg`;
@@ -41,7 +46,7 @@ function main(): void {
   const uniqueFills = new Set(result.layers.map((l) => l.color)).size;
   const totalPaths = result.layers.reduce((n, l) => n + l.pathData.length, 0);
   process.stdout.write(
-    `iter${iter}: wrote ${outPath} — k=${result.k}, uniqueFills=${uniqueFills}, paths=${totalPaths}, ${ms}ms\n`,
+    `iter${iter}: wrote ${outPath} — k=${result.k}, uniqueFills=${uniqueFills}, paths=${totalPaths}, sal=${saliencyWeight ?? 0}, ${ms}ms\n`,
   );
 }
 
