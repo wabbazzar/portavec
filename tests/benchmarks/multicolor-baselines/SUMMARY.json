@@ -1,11 +1,11 @@
 {
   "runs": 18,
-  "lossMedian": 0.19693377249787347,
-  "lossMean": 0.2626485120104362,
+  "lossMedian": 0.18987194320490092,
+  "lossMean": 0.25686006614217544,
   "lossMin": 0.0063303341767397825,
-  "lossMax": 0.6896481368043094,
-  "paletteMatchMedian": 0.8409105143560732,
-  "coverageIoUMedian": 0.7447412288141073,
+  "lossMax": 0.652555142864649,
+  "paletteMatchMedian": 0.8475495316276226,
+  "coverageIoUMedian": 0.7542488859309595,
   "kMatchRate": 0.6111111111111112,
-  "generatedAt": "2026-04-17T12:49:41.661Z"
+  "generatedAt": "2026-04-17T12:57:42.778Z"
 }

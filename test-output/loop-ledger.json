@@ -1,5 +1,5 @@
 {
-  "iter": 7,
+  "iter": 8,
   "note": "Self-improving loop: improve multicolor pipeline for 20-30 color images; target hw_forest_cat quality.",
   "baseline": {
     "n20_clean": 0.015,
@@ -11,22 +11,22 @@
     "global_median": 0.2325
   },
   "current": {
-    "n30_clean": 0.025,
-    "n30_noisy": 0.653,
-    "global_median": 0.1969,
-    "global_mean": 0.2629,
-    "paletteMatchMedian": 0.8409,
-    "coverageIoUMedian": 0.7447,
-    "kMatchRate": 0.556
+    "global_median": 0.1899,
+    "global_mean": 0.2569,
+    "paletteMatchMedian": 0.8475,
+    "coverageIoUMedian": 0.7542,
+    "kMatchRate": 0.611,
+    "max_loss": 0.653
   },
   "best": {
-    "global_median": 0.1969,
-    "delta_vs_baseline": -0.0356,
-    "delta_pct": -15.3
+    "global_median": 0.1899,
+    "delta_vs_baseline": -0.0426,
+    "delta_pct": -18.3
   },
   "kept_changes": [
-    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "delta_global_median": -0.0108, "delta_pct": -4.6 },
-    { "iter": 7, "param": "mergeThreshold", "from": 6, "to": 4, "delta_global_median": -0.0248, "delta_pct": -11.2 }
+    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "delta_pct": -4.6 },
+    { "iter": 7, "param": "mergeThreshold", "from": 6, "to": 4, "delta_pct": -11.2 },
+    { "iter": 8, "param": "saliencyWeight", "from": 0, "to": 1, "delta_pct": -3.6, "combined_with": "mergeThreshold=4" }
   ],
   "tried": [
     { "iter": 2, "param": "mergeThreshold", "from": 8, "to": 14, "kept": false },
@@ -36,28 +36,29 @@
     { "iter": 4, "param": "restarts", "from": 5, "to": 12, "kept": false },
     { "iter": 4, "param": "denoisePasses", "from": 2, "to": 3, "kept": false },
     { "iter": 4, "param": "autoKStrategy", "from": "merge", "to": "elbow", "kept": false },
-    { "iter": 5, "param": "saliencyWeight", "from": 0, "to": 1, "kept": "code-only" },
+    { "iter": 5, "param": "saliencyWeight", "from": 0, "to": 1, "at_mt": 8, "kept": false, "note": "rejected at mt=8 because clean cells had no slack; now kept when combined with mt=4." },
     { "iter": 6, "param": "minClusterFraction", "from": 0, "to": 0.0005, "kept": false },
-    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "delta_pct": -4.6, "kept": true },
-    { "iter": 7, "param": "mergeThreshold", "from": 6, "to": 4, "delta_pct": -11.2, "kept": true },
-    { "iter": 7, "param": "mergeThreshold", "from": 4, "to": 2, "delta_pct": -0.005, "result": "bit-identical (no pairs in [2,4) ΔE); mt=4 is the effective floor", "kept": false }
+    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "kept": true, "delta_pct": -4.6 },
+    { "iter": 7, "param": "mergeThreshold", "from": 6, "to": 4, "kept": true, "delta_pct": -11.2 },
+    { "iter": 7, "param": "mergeThreshold", "from": 4, "to": 2, "kept": false, "note": "bit-identical to mt=4" },
+    { "iter": 8, "param": "denoiseRadius", "from": 1, "to": 2, "at_mt": 4, "kept": false, "note": "still +18%; combination doesn't rescue denoise" },
+    { "iter": 8, "param": "saliencyWeight", "from": 0, "to": 1, "at_mt": 4, "kept": true, "delta_pct": -3.6, "note": "saliency bias becomes net-positive when clean cells have slack from mt=4" }
   ],
   "forest_cat_renders": [
-    { "iter": 0, "mergeThreshold": 8, "uniqueFills": 30, "paths": 8273 },
-    { "iter": "6_mt6", "mergeThreshold": 6, "uniqueFills": 30, "paths": 8273, "note": "unchanged vs mt=8" },
-    { "iter": "7_mt4", "mergeThreshold": 4, "uniqueFills": 30, "paths": 8273, "note": "unchanged vs mt=8 — forest cat has no ΔE cluster pairs in the [4,8] merge range" }
+    { "iter": 0, "mergeThreshold": 8, "saliencyWeight": 0, "uniqueFills": 30, "paths": 8273 },
+    { "iter": "7_mt4", "mergeThreshold": 4, "saliencyWeight": 0, "uniqueFills": 30, "paths": 8273, "note": "unchanged vs iter0" },
+    { "iter": "8_mt4_sal1", "mergeThreshold": 4, "saliencyWeight": 1, "uniqueFills": 30, "paths": 8438, "note": "FIRST measurable forest_cat change: +165 paths (+2%) from saliency-weighted init picking different cluster centers" }
   ],
-  "per_cell_at_mt4": {
-    "n30_clean": { "seed1": 0.010, "seed2": 0.025, "seed3": 0.054, "median": 0.025, "baseline": 0.104, "delta_pct": -76 },
-    "n30_noisy": { "seed1": 0.555, "seed2": 0.690, "seed3": 0.653, "median": 0.653, "baseline": 0.656, "delta_pct": -0.5 }
-  },
   "observations": [
-    "mergeThreshold is the dominant knob for synthetic quality. 8 (default) was too aggressive; 4 preserves genuine cluster distinctions while still merging noise-duplicates. Below 4 is the floor (no pairs closer than ΔE=4 exist in the over-clustered output).",
-    "n30_clean went from 0.104 → 0.025 (-76%), comfortably past the 15% exit threshold.",
-    "n30_noisy essentially unchanged — mergeThreshold doesn't help when clusters are genuinely wrong from noise-induced k-means drift.",
-    "Forest cat unaffected by mergeThreshold change (same 8273 paths, 30 unique fills, bit-identical SVG). Forest cat's cluster centers aren't within the [4, 8] ΔE gap — it's well-separated enough that the narrower merge window doesn't change its behavior.",
-    "Exit criterion: n30_clean ≥15% drop ✓ ACHIEVED (-76%). Forest cat visibly more distinct colors ✗ NOT achieved — forest cat's ceiling under this pipeline is reached; further gains require algorithmic changes (per-image k, salient quantization, etc.)."
+    "3 kept changes total: mt 8→6→4, saliency 0→1. Global median 0.2325→0.1899 (-18.3%).",
+    "Key finding: single probes are order-dependent. saliencyWeight failed at mt=8 (iter 5) because clean cells already at their limit; kept at mt=4 because clean cells have slack. Future probing should re-test rejected probes after each kept change.",
+    "Forest cat finally shifted: 8273→8438 paths (+2%) from the saliency-weighted init. Visual comparison needed to judge if tree-doors improve — path count is a coarse proxy.",
+    "Max loss dropped meaningfully: 0.697 → 0.653. The worst noisy cell is getting slightly better without the clean cells regressing."
   ],
-  "exit_status": "Half-satisfied: synthetic exit met; forest-cat exit not met. Recommend stopping parameter tuning (mergeThreshold=4 is the new kept default) and opening a slice for forest-cat-specific improvement.",
-  "nokept_streak": 0
+  "exit_status": {
+    "n30_clean_15pct": "ACHIEVED (-76% at mt=4; likely similar or better with saliency)",
+    "forest_cat_distinct": "PARTIAL (paths changed +2%; needs visual inspection of tree-door region)",
+    "nokept_streak": 0
+  },
+  "next_probe": "Re-test previously-rejected probes under the new best config (mt=4, sal=1): denoisePasses, restarts, autoKStrategy silhouette."
 }

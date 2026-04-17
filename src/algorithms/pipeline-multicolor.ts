@@ -133,7 +133,7 @@ const DEFAULT_OPTS: Required<Pick<MultiColorOptions,
   minContourLength: 3,
   simplifyTolerance: 0.3,
   curveTolerance: 1.2,
-  saliencyWeight: 0,
+  saliencyWeight: 1,
 };
 
 export function runMultiColorPipeline(
