@@ -14,10 +14,18 @@ export interface Parameters {
   /**
    * Number of colors for multi-color vectorization.
    *   1    — single-color pipeline (existing behavior)
-   *   2-16 — multi-color pipeline, manual k
+   *   2-30 — multi-color pipeline, manual k
    *   0    — multi-color pipeline, auto-k (elbow)
    */
   colors: number;
+  /** k-means++ saliency bias (0 = off, typical 0-2). */
+  saliencyWeight: number;
+  /** Reserved salient-color seeds (0 = off, typical 0-12). */
+  salientSeedBudget: number;
+  /** ΔE merge threshold for cluster merging (lower = preserve more). */
+  mergeThreshold: number;
+  /** True if current params were auto-populated from a tuning manifest. */
+  tuned: boolean;
 }
 
 export type DiffMode = 'side-by-side' | 'onion' | 'difference' | 'toggle';
@@ -67,6 +75,10 @@ export const initialState: AppState = {
     curveTolerance: 2.0,
     minPathLength: 10,
     colors: 1,
+    saliencyWeight: 1,
+    salientSeedBudget: 0,
+    mergeThreshold: 4,
+    tuned: false,
   },
 
   diffMode: 'side-by-side',
@@ -80,6 +92,7 @@ export type AppAction =
   | { type: 'SET_RESULT'; payload: { svg: string; rasterized: ImageData; metrics: Partial<Metrics> } }
   | { type: 'SET_METRICS'; payload: Partial<Metrics> }
   | { type: 'SET_PARAMETER'; payload: { key: keyof Parameters; value: number } }
+  | { type: 'SET_PARAMETERS'; payload: Partial<Parameters> }
   | { type: 'SET_DIFF_MODE'; payload: DiffMode }
   | { type: 'SET_PROCESSING'; payload: boolean }
   | { type: 'SET_ERROR'; payload: string | null };
@@ -130,6 +143,17 @@ export function appReducer(state: AppState, action: AppAction): AppState {
         parameters: {
           ...state.parameters,
           [action.payload.key]: action.payload.value,
+          // Hand-edit clears the "tuned" badge.
+          tuned: action.payload.key === 'tuned' ? Boolean(action.payload.value) : false,
+        },
+      };
+
+    case 'SET_PARAMETERS':
+      return {
+        ...state,
+        parameters: {
+          ...state.parameters,
+          ...action.payload,
         },
       };
 

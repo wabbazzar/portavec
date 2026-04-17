@@ -7,6 +7,9 @@
 
 .controls-header {
   margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .controls-title {
@@ -17,10 +20,21 @@
   color: var(--text-secondary);
 }
 
+.controls-tuned-badge {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background: var(--accent-primary);
+  color: #fff;
+}
+
 .controls-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px 24px;
 }
 
 .slider-control {

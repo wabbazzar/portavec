@@ -60,6 +60,9 @@ function App() {
           k: parameters.colors === 0 ? undefined : parameters.colors,
           curveTolerance: parameters.curveTolerance,
           minContourLength: parameters.minPathLength,
+          saliencyWeight: parameters.saliencyWeight,
+          salientSeedBudget: parameters.salientSeedBudget,
+          mergeThreshold: parameters.mergeThreshold,
         });
         processingTimeMs = performance.now() - t0;
         svg = result.svg;

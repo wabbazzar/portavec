@@ -47,6 +47,7 @@ export function ParameterControls() {
     <div className="parameter-controls">
       <div className="controls-header">
         <span className="controls-title">Parameters</span>
+        {parameters.tuned && <span className="controls-tuned-badge">tuned</span>}
       </div>
       <div className="controls-grid">
         <Slider
@@ -79,10 +80,35 @@ export function ParameterControls() {
           label="Colors"
           value={parameters.colors}
           min={0}
-          max={16}
+          max={30}
           step={1}
           onChange={(v) => updateParameter('colors', v)}
           displayValue={parameters.colors === 0 ? 'auto' : String(parameters.colors)}
+        />
+        <Slider
+          label="Saliency Weight"
+          value={parameters.saliencyWeight}
+          min={0}
+          max={4}
+          step={0.5}
+          onChange={(v) => updateParameter('saliencyWeight', v)}
+          displayValue={parameters.saliencyWeight.toFixed(1)}
+        />
+        <Slider
+          label="Salient Seeds"
+          value={parameters.salientSeedBudget}
+          min={0}
+          max={12}
+          step={1}
+          onChange={(v) => updateParameter('salientSeedBudget', v)}
+        />
+        <Slider
+          label="Merge Threshold"
+          value={parameters.mergeThreshold}
+          min={1}
+          max={16}
+          step={1}
+          onChange={(v) => updateParameter('mergeThreshold', v)}
         />
       </div>
     </div>

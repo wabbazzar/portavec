@@ -28,9 +28,32 @@ interface Manifest {
   real?: RealEntry[];
 }
 
+interface TuningEntry {
+  hasTruth: boolean;
+  best: {
+    config: {
+      k?: number;
+      saliencyWeight: number;
+      salientSeedBudget: number;
+      mergeThreshold: number;
+    };
+    score: number;
+    scoreType: string;
+    paths: number;
+    uniqueFills: number;
+  };
+  runCount: number;
+}
+
+interface TuningManifest {
+  generatedAt: string;
+  entries: Record<string, TuningEntry>;
+}
+
 export function BenchmarkGallery() {
   const dispatch = useAppDispatch();
   const [manifest, setManifest] = useState<Manifest | null>(null);
+  const [tuning, setTuning] = useState<TuningManifest | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<string | null>(null);
 
@@ -42,6 +65,11 @@ export function BenchmarkGallery() {
       })
       .then(setManifest)
       .catch((e) => setError(String(e)));
+    // Tuning manifest is optional — if missing, images just use pipeline defaults.
+    fetch('/training/tuning-manifest.json')
+      .then((r) => (r.ok ? r.json() : null))
+      .then((m) => { if (m) setTuning(m); })
+      .catch(() => { /* silent — tuning is best-effort */ });
   }, []);
 
   const grouped = useMemo(() => {
@@ -62,6 +90,21 @@ export function BenchmarkGallery() {
         type: 'SET_SOURCE_IMAGE',
         payload: { image, fileName: png, sourceType: 'benchmark' },
       });
+      // If this image has a tuned config, auto-populate the parameter controls.
+      const entry = tuning?.entries[name];
+      if (entry) {
+        const cfg = entry.best.config;
+        dispatch({
+          type: 'SET_PARAMETERS',
+          payload: {
+            colors: cfg.k ?? 0, // 0 = auto
+            saliencyWeight: cfg.saliencyWeight,
+            salientSeedBudget: cfg.salientSeedBudget,
+            mergeThreshold: cfg.mergeThreshold,
+            tuned: true,
+          },
+        });
+      }
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
