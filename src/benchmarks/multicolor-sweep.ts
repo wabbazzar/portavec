@@ -80,7 +80,7 @@ async function main(): Promise<void> {
     for (const colors of args.colors) {
       const shapeList = args.shapes === 'match' ? [colors] : args.shapes;
       for (const shapes of shapeList) {
-        if (colors < 1 || colors > 16 || shapes < 1 || shapes > 16) continue;
+        if (colors < 1 || colors > 30 || shapes < 1 || shapes > 30) continue;
         for (const noise of args.noises) {
           const input = {
             seed,

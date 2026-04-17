@@ -17,8 +17,8 @@ const LIGHT = 0.5;
  * rotation, so the output is deterministic for a given seed.
  */
 export function pickPalette(rng: Rng, n: number): string[] {
-  if (n < 1 || n > 16 || !Number.isInteger(n)) {
-    throw new Error(`pickPalette: n must be integer in [1, 16], got ${n}`);
+  if (n < 1 || n > 30 || !Number.isInteger(n)) {
+    throw new Error(`pickPalette: n must be integer in [1, 30], got ${n}`);
   }
   const rotation = rng.next(); // [0, 1)
   const colors: string[] = [];

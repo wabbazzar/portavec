@@ -137,7 +137,7 @@ async function main(): Promise<void> {
 
   for (const seed of args.seeds) {
     for (const count of args.counts) {
-      if (count < 1 || count > 16) continue;
+      if (count < 1 || count > 30) continue;
       const variants: Array<{ tag: string; truth: Truth }> = [
         {
           tag: '',

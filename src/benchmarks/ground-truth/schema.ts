@@ -40,21 +40,21 @@ export interface Truth {
 }
 
 /**
- * Integer in [1, 16]. Validated at runtime by `generateTruth`.
+ * Integer in [1, 30]. Validated at runtime by `generateTruth`.
  */
 export type ShapeCount = number;
 
-export const MAX_SHAPE_COUNT = 16;
+export const MAX_SHAPE_COUNT = 30;
 
 export interface GeneratorInput {
   seed: number;
   /**
    * Number of foreground colors the palette should contain. Equals
-   * `shapes.length` — each shape gets its own color. Range: 1..16.
+   * `shapes.length` — each shape gets its own color. Range: 1..30.
    */
   colors: ShapeCount;
   /**
-   * Number of shapes to place. Must match `colors`. Range: 1..16.
+   * Number of shapes to place. Must match `colors`. Range: 1..30.
    */
   shapeCount: ShapeCount;
   width: number;

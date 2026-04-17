@@ -1,0 +1,55 @@
+{
+  "iter": 1,
+  "note": "Self-improving loop: improve multicolor pipeline for 20-30 color images; target hw_forest_cat quality.",
+  "baseline": {
+    "n20_clean": 0.015,
+    "n20_noisy": 0.388,
+    "n24_clean": 0.097,
+    "n24_noisy": 0.530,
+    "n30_clean": 0.104,
+    "n30_noisy": 0.656
+  },
+  "current": {
+    "n20_clean": 0.015,
+    "n20_noisy": 0.388,
+    "n24_clean": 0.097,
+    "n24_noisy": 0.530,
+    "n30_clean": 0.104,
+    "n30_noisy": 0.656
+  },
+  "best": {
+    "n20_clean": 0.015,
+    "n20_noisy": 0.388,
+    "n24_clean": 0.097,
+    "n24_noisy": 0.530,
+    "n30_clean": 0.104,
+    "n30_noisy": 0.656
+  },
+  "tried": [],
+  "forest_cat_renders": [
+    {
+      "iter": 0,
+      "file": "test-output/hw_forest_cat_iter0.svg",
+      "k": 30,
+      "uniqueFills": 30,
+      "paths": 8273,
+      "ms": 8496
+    }
+  ],
+  "observations": [
+    "Clean images: auto-k overshoots by 0-1 (n20→21, n24→24-26, n30→29-30). Loss dominated by coverage gap not palette mismatch.",
+    "Noisy images: k badly overshoots to 27-31 regardless of truth count. Palette match drops to 0.35-0.69, coverage to 0.18-0.49. Biggest win available here.",
+    "kMatchRate = 0.44 overall; near-perfect on clean, poor on noisy. Elbow detector is noise-sensitive.",
+    "Forest cat renders with 30 unique fills and 8273 paths at k=30. Visual review pending."
+  ],
+  "nextProbe": {
+    "cell": "n30_noisy",
+    "reason": "Highest loss; biggest improvement headroom. Noise-handling is the weakest link.",
+    "candidates": [
+      "denoisePasses: 1→2 (more pre-quantize smoothing)",
+      "denoiseRadius: 1→2",
+      "autoKStrategy: merge→silhouette (less overshoot under noise)",
+      "minClusterFraction: 0.001→0.004 (dissolve noise-induced tiny clusters)"
+    ]
+  }
+}

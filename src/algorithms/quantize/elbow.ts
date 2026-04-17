@@ -40,8 +40,8 @@ export interface ChooseKResult {
 }
 
 export function chooseK(imageData: ImageData, opts: ChooseKOptions): ChooseKResult {
-  // Default maxK covers up to 15 shape colors + 1 background.
-  const maxK = Math.min(64, Math.max(1, opts.maxK ?? 16));
+  // Default maxK covers up to 31 shape colors + 1 background.
+  const maxK = Math.min(64, Math.max(1, opts.maxK ?? 32));
 
   // Run k-means for every k and keep the assignment + wcss.
   const results: QuantizeResult[] = new Array(maxK + 1);
