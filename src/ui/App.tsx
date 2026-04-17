@@ -8,11 +8,8 @@ import { MetricsPanel } from './MetricsPanel';
 import { ParameterControls } from './ParameterControls';
 import { DiffOverlay } from './DiffOverlay';
 import { downloadSvg } from '../utils/image';
-import { runPipeline, renderSvgToImageData } from '../algorithms/pipeline';
-import {
-  runMultiColorPipeline,
-  multicolorToImageData,
-} from '../algorithms/pipeline-multicolor';
+import { renderSvgToImageData } from '../algorithms/pipeline';
+import { runMultiInWorker, runSingleInWorker } from '../workers/pipeline-client';
 import { imageToAscii, type AsciiGrid } from '../algorithms/ascii';
 import { calculateSSIM, calculatePixelDiff } from '../utils/metrics';
 import type { ThresholdMethod } from '../algorithms/threshold';
@@ -55,8 +52,7 @@ function App() {
       let rasterized: ImageData;
 
       if (multiColor) {
-        const t0 = performance.now();
-        const result = runMultiColorPipeline(sourceImage, {
+        const result = await runMultiInWorker(sourceImage, {
           k: parameters.colors === 0 ? undefined : parameters.colors,
           curveTolerance: parameters.curveTolerance,
           minContourLength: parameters.minPathLength,
@@ -64,26 +60,25 @@ function App() {
           salientSeedBudget: parameters.salientSeedBudget,
           mergeThreshold: parameters.mergeThreshold,
         });
-        processingTimeMs = performance.now() - t0;
         svg = result.svg;
-        pathCount = result.layers.reduce((n, l) => n + l.pathData.length, 0);
-        nodeCount = pathCount; // no per-segment count from multi-color pipeline
-        // Use our own index-based rasterizer rather than a canvas round-trip
-        // — avoids SSIM noise from anti-aliasing.
-        rasterized = multicolorToImageData(result);
+        pathCount = result.pathCount;
+        nodeCount = result.nodeCount;
+        processingTimeMs = result.processingTimeMs;
+        rasterized = result.rasterized;
       } else {
         const thresholdMethod: ThresholdMethod =
           parameters.threshold >= 100 && parameters.threshold <= 150 ? 'otsu' : 'manual';
-        const result = runPipeline(sourceImage, {
+        const result = await runSingleInWorker(sourceImage, {
           thresholdMethod,
           manualThreshold: parameters.threshold,
           curveTolerance: parameters.curveTolerance,
           minContourLength: parameters.minPathLength,
         });
         svg = result.svg;
-        pathCount = result.metrics.totalContours;
-        nodeCount = result.metrics.totalSegments;
-        processingTimeMs = result.metrics.processingTimeMs;
+        pathCount = result.pathCount;
+        nodeCount = result.nodeCount;
+        processingTimeMs = result.processingTimeMs;
+        // Single-color rasterization uses a DOM Canvas; can't run in worker.
         const { width, height } = sourceImage;
         rasterized = await renderSvgToImageData(svg, width, height);
       }
