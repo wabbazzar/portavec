@@ -1,5 +1,5 @@
 {
-  "iter": 3,
+  "iter": 4,
   "note": "Self-improving loop: improve multicolor pipeline for 20-30 color images; target hw_forest_cat quality.",
   "baseline": {
     "n20_clean": 0.015,
@@ -26,46 +26,13 @@
     "n30_noisy": 0.656
   },
   "tried": [
-    {
-      "iter": 2,
-      "param": "mergeThreshold",
-      "from": 8,
-      "to": 14,
-      "cell": "n30_noisy",
-      "result": "bit-identical (no cluster pairs in the new ΔE band)",
-      "kept": false
-    },
-    {
-      "iter": 2,
-      "param": "denoiseRadius",
-      "from": 1,
-      "to": 2,
-      "cell": "global",
-      "delta_n30_noisy": -0.058,
-      "delta_global_median": 0.033,
-      "result": "n30_noisy -8.8% but global median +14%; clean cells regress (blur eats sharp synthetic detail)",
-      "kept": false
-    },
-    {
-      "iter": 3,
-      "param": "minClusterFraction",
-      "from": 0,
-      "to": 0.002,
-      "cell": "global",
-      "delta_global_median": 0.239,
-      "result": "global median nearly doubled; at n=30, genuine shapes (10-20px) fall below 131px threshold and get dissolved",
-      "kept": false
-    },
-    {
-      "iter": 3,
-      "param": "autoKStrategy",
-      "from": "merge",
-      "to": "silhouette",
-      "cell": "global",
-      "delta_global_median": 0.081,
-      "result": "global +35%; silhouette penalizes high-k solutions, forcing under-clustering on shape-rich inputs",
-      "kept": false
-    }
+    { "iter": 2, "param": "mergeThreshold", "from": 8, "to": 14, "result": "bit-identical", "kept": false },
+    { "iter": 2, "param": "denoiseRadius", "from": 1, "to": 2, "delta_global_median": 0.033, "result": "noisy -9% but clean +15% globally", "kept": false },
+    { "iter": 3, "param": "minClusterFraction", "from": 0, "to": 0.002, "delta_global_median": 0.239, "result": "global +103%; dissolves genuine small shapes", "kept": false },
+    { "iter": 3, "param": "autoKStrategy", "from": "merge", "to": "silhouette", "delta_global_median": 0.081, "result": "global +35%", "kept": false },
+    { "iter": 4, "param": "restarts", "from": 5, "to": 12, "delta_global_median": 0.001, "result": "flat (+0.5%); below 2% keep threshold", "kept": false },
+    { "iter": 4, "param": "denoisePasses", "from": 2, "to": 3, "delta_global_median": 0.008, "result": "+3.4% regression", "kept": false },
+    { "iter": 4, "param": "autoKStrategy", "from": "merge", "to": "elbow", "delta_global_median": 0.081, "result": "identical to silhouette — code paths converge", "kept": false }
   ],
   "forest_cat_renders": [
     { "iter": 0,  "k": 30, "uniqueFills": 30, "paths": 8273,  "svgBytes": 1692714, "ms": 8496 },
@@ -75,21 +42,12 @@
     { "iter": 50, "k": 50, "uniqueFills": 50, "paths": 11743, "svgBytes": 2335558, "ms": 16123 }
   ],
   "observations": [
-    "Iter 2-3: 4 param probes, 0 kept. Current defaults sit near a local minimum for synthetic median; single-param nudges mostly hurt.",
-    "Iter 3 palette audit (grep fill= from each render): k=20 has 5 dark-brown tones, k=30 has 6, k=50 has 15+. Higher k refines existing color FAMILIES (brown grades, cat-fur orange grades) but does not introduce NEW families. Tree doors are getting averaged with bark rather than given their own cluster.",
-    "Root cause likely upstream of k-tuning: k-means picks clusters weighted by pixel frequency, so rare salient colors (like a distinctive door) are absorbed by dominant surrounds. More k doesn't help because the extra budget is spent refining frequent colors.",
-    "Candidate next slice (out of scope for param tuning): salient-color-preserving quantization. Options: (a) saturation-weighted pre-pass that boosts high-chroma pixels before k-means, (b) octree / median-cut quantization that splits on color variance rather than pixel mass, (c) spatial coherence term that keeps spatially-isolated color regions even when small.",
-    "Synthetic sweep is a weak oracle for hw_forest_cat: clean synthetic penalizes denoise that real-world images need; noisy synthetic uses uniform noise unlike real JPEG/AI artifacts. A forest-cat-specific metric (e.g. ΔE spread of chosen palette vs. source's high-saturation pixels) would steer tuning better."
+    "7 param probes across 3 iters, 0 kept. Current defaults (maxK=32, restarts=5, merge, denoiseRadius=1, denoisePasses=2, mergeThreshold=8, minClusterFraction=0) are near-optimal for the synthetic benchmark.",
+    "autoKStrategy 'elbow' === 'silhouette' in practice (identical sweep output). The three-way knob is effectively two-way (merge vs not-merge).",
+    "restarts 5→12 costs ~2.4x CPU for +0.5% loss. Not worth it.",
+    "Forest-cat k-sweep: higher k adds color-family GRADES (more brown/orange shades) but no new COLOR FAMILIES. Tree doors are absorbed by bark regardless of k.",
+    "Plateau diagnosis: single-param tuning cannot fix salient-color loss. Next productive step is algorithmic — saturation-weighted k-means pre-pass OR a pre-quantize pass that reserves cluster budget for high-chroma minority pixels."
   ],
-  "nextProbe": {
-    "cell": "n30_noisy",
-    "reason": "Highest remaining loss; cheap remaining probes to exhaust.",
-    "candidates": [
-      "restarts: 5 → 12 (better k-means local-min escape; cheap)",
-      "denoisePasses: 2 → 3 (separate axis from radius; may help noisy without hurting clean as much)",
-      "Stop-loop candidate: declare plateau after 2-3 more rejected probes; recommend new slice for salient quantization."
-    ]
-  },
-  "nokept_streak": 3,
-  "exit_watch": "3 of 10 consecutive no-kept iterations. Likely to plateau without algorithmic change."
+  "nokept_streak": 4,
+  "recommendation": "Pause loop; open a slice for salient-color-preserving quantization in specs/tickets/. Single-param probes are exhausted in the productive candidate list."
 }
