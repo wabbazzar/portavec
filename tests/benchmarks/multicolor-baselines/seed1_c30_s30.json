@@ -165,14 +165,14 @@
     ]
   },
   "output": {
-    "k": 29,
+    "k": 31,
     "palette": [
       "#ffffff",
       "#df204d",
       "#8b20df",
       "#df8b20",
       "#20df8b",
-      "#41df20",
+      "#27df20",
       "#df209a",
       "#209adf",
       "#c0df20",
@@ -183,7 +183,7 @@
       "#20df65",
       "#d820df",
       "#df6520",
-      "#2426df",
+      "#2027df",
       "#dfb220",
       "#2074df",
       "#df2027",
@@ -195,7 +195,9 @@
       "#9adf20",
       "#dfd820",
       "#20dfd8",
-      "#b220df"
+      "#b220df",
+      "#4ddf20",
+      "#3f20df"
     ],
     "layerPixelCounts": [
       54376,
@@ -203,7 +205,7 @@
       208,
       448,
       138,
-      348,
+      140,
       912,
       132,
       384,
@@ -214,7 +216,7 @@
       208,
       356,
       316,
-      791,
+      716,
       384,
       316,
       616,
@@ -226,19 +228,21 @@
       70,
       316,
       57,
-      32
+      32,
+      208,
+      75
     ],
     "svgByteLength": 14883
   },
   "loss": {
-    "paletteMatch": 0.9314242513009606,
-    "coverageIoU": 0.9010846980046288,
-    "centroidError": 0.054279675424476544,
-    "loss": 0.08231591801974902,
+    "paletteMatch": 1,
+    "coverageIoU": 0.9805479824686523,
+    "centroidError": 0.0000750998092189897,
+    "loss": 0.00973351874659567,
     "matches": [
       10,
       16,
-      -1,
+      30,
       23,
       2,
       28,
@@ -256,8 +260,8 @@
       8,
       25,
       24,
+      29,
       5,
-      0,
       20,
       13,
       4,
@@ -276,15 +280,15 @@
       },
       {
         "truthColor": "#2027df",
-        "matchedColor": "#2426df",
-        "iou": 0.9051833122629582,
-        "centroidDistPx": 13.13799590052557
+        "matchedColor": "#2027df",
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#3f20df",
-        "matchedColor": null,
-        "iou": 0,
-        "centroidDistPx": 362.03867196751236
+        "matchedColor": "#3f20df",
+        "iou": 0.9146341463414634,
+        "centroidDistPx": 0.07481123931730815
       },
       {
         "truthColor": "#6520df",
@@ -390,15 +394,15 @@
       },
       {
         "truthColor": "#4ddf20",
-        "matchedColor": "#41df20",
-        "iou": 0.5977011494252874,
-        "centroidDistPx": 87.20912148012643
+        "matchedColor": "#4ddf20",
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#27df20",
-        "matchedColor": "#ffffff",
-        "iou": 0.00007337295472888693,
-        "centroidDistPx": 126.41359900046645
+        "matchedColor": "#27df20",
+        "iou": 0.9722222222222222,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#20df3f",
@@ -450,5 +454,5 @@
       }
     ]
   },
-  "timingMs": 258.2760910000002
+  "timingMs": 251.31241100000034
 }

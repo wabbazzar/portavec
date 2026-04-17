@@ -123,7 +123,7 @@ const DEFAULT_OPTS: Required<Pick<MultiColorOptions,
   denoisePasses: 2,
   restarts: 5,
   autoKStrategy: 'merge',
-  mergeThreshold: 6,
+  mergeThreshold: 4,
   minClusterFraction: 0,
   // Gradient-couple pass disabled by default: on the current loss it
   // trades coverage IoU for SVG aesthetics. Enable per-call with a

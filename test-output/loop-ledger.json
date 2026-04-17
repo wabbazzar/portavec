@@ -1,5 +1,5 @@
 {
-  "iter": 6,
+  "iter": 7,
   "note": "Self-improving loop: improve multicolor pipeline for 20-30 color images; target hw_forest_cat quality.",
   "baseline": {
     "n20_clean": 0.015,
@@ -11,52 +11,53 @@
     "global_median": 0.2325
   },
   "current": {
-    "global_median": 0.2217,
-    "global_mean": 0.2742,
-    "paletteMatchMedian": 0.8232,
-    "coverageIoUMedian": 0.7133,
-    "kMatchRate": 0.389
+    "n30_clean": 0.025,
+    "n30_noisy": 0.653,
+    "global_median": 0.1969,
+    "global_mean": 0.2629,
+    "paletteMatchMedian": 0.8409,
+    "coverageIoUMedian": 0.7447,
+    "kMatchRate": 0.556
   },
   "best": {
-    "global_median": 0.2217
+    "global_median": 0.1969,
+    "delta_vs_baseline": -0.0356,
+    "delta_pct": -15.3
   },
   "kept_changes": [
-    {
-      "iter": 6,
-      "param": "mergeThreshold",
-      "from": 8,
-      "to": 6,
-      "delta_global_median": -0.0108,
-      "delta_pct": -4.6,
-      "notes": "Lower ΔE merge window = more cluster preservation. Improves synthetic median without regressing forest cat (k=30 layers unchanged; no cluster pairs fall in the narrower 6-8 ΔE gap)."
-    }
+    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "delta_global_median": -0.0108, "delta_pct": -4.6 },
+    { "iter": 7, "param": "mergeThreshold", "from": 6, "to": 4, "delta_global_median": -0.0248, "delta_pct": -11.2 }
   ],
   "tried": [
-    { "iter": 2, "param": "mergeThreshold", "from": 8, "to": 14, "result": "bit-identical", "kept": false },
-    { "iter": 2, "param": "denoiseRadius", "from": 1, "to": 2, "delta_global_median": 0.033, "result": "noisy -9% but clean +15% globally", "kept": false },
-    { "iter": 3, "param": "minClusterFraction", "from": 0, "to": 0.002, "delta_global_median": 0.239, "result": "global +103%", "kept": false },
-    { "iter": 3, "param": "autoKStrategy", "from": "merge", "to": "silhouette", "delta_global_median": 0.081, "result": "global +35%", "kept": false },
-    { "iter": 4, "param": "restarts", "from": 5, "to": 12, "delta_global_median": 0.001, "result": "flat (+0.5%)", "kept": false },
-    { "iter": 4, "param": "denoisePasses", "from": 2, "to": 3, "delta_global_median": 0.008, "result": "+3.4%", "kept": false },
-    { "iter": 4, "param": "autoKStrategy", "from": "merge", "to": "elbow", "delta_global_median": 0.081, "result": "identical to silhouette", "kept": false },
-    { "iter": 5, "param": "saliencyWeight (new option)", "from": 0, "to": 1, "delta_global_median": 0.008, "result": "synthetic +3.5%; no new forest_cat color families. Option preserved, default kept at 0.", "kept": "code-only" },
-    { "iter": 6, "param": "minClusterFraction", "from": 0, "to": 0.0005, "delta_global_median": 0.035, "result": "+14.6% (still dissolves some n=30 shapes <33px)", "kept": false },
-    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "delta_global_median": -0.0108, "result": "-4.6% — first kept improvement!", "kept": true }
+    { "iter": 2, "param": "mergeThreshold", "from": 8, "to": 14, "kept": false },
+    { "iter": 2, "param": "denoiseRadius", "from": 1, "to": 2, "kept": false },
+    { "iter": 3, "param": "minClusterFraction", "from": 0, "to": 0.002, "kept": false },
+    { "iter": 3, "param": "autoKStrategy", "from": "merge", "to": "silhouette", "kept": false },
+    { "iter": 4, "param": "restarts", "from": 5, "to": 12, "kept": false },
+    { "iter": 4, "param": "denoisePasses", "from": 2, "to": 3, "kept": false },
+    { "iter": 4, "param": "autoKStrategy", "from": "merge", "to": "elbow", "kept": false },
+    { "iter": 5, "param": "saliencyWeight", "from": 0, "to": 1, "kept": "code-only" },
+    { "iter": 6, "param": "minClusterFraction", "from": 0, "to": 0.0005, "kept": false },
+    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "delta_pct": -4.6, "kept": true },
+    { "iter": 7, "param": "mergeThreshold", "from": 6, "to": 4, "delta_pct": -11.2, "kept": true },
+    { "iter": 7, "param": "mergeThreshold", "from": 4, "to": 2, "delta_pct": -0.005, "result": "bit-identical (no pairs in [2,4) ΔE); mt=4 is the effective floor", "kept": false }
   ],
   "forest_cat_renders": [
-    { "iter": 0, "k": 30, "mergeThreshold": 8, "uniqueFills": 30, "paths": 8273 },
-    { "iter": "5_sal1", "k": 30, "mergeThreshold": 8, "sal": 1, "paths": 8438 },
-    { "iter": "5_sal2", "k": 30, "mergeThreshold": 8, "sal": 2, "paths": 8420 },
-    { "iter": "5_sal4", "k": 30, "mergeThreshold": 8, "sal": 4, "paths": 8309 },
-    { "iter": "6_mt6", "k": 30, "mergeThreshold": 6, "uniqueFills": 30, "paths": 8273, "note": "Same layout as iter0 — mergeThreshold=6 doesn't change forest_cat clustering (no pairs in the narrower gap)" }
+    { "iter": 0, "mergeThreshold": 8, "uniqueFills": 30, "paths": 8273 },
+    { "iter": "6_mt6", "mergeThreshold": 6, "uniqueFills": 30, "paths": 8273, "note": "unchanged vs mt=8" },
+    { "iter": "7_mt4", "mergeThreshold": 4, "uniqueFills": 30, "paths": 8273, "note": "unchanged vs mt=8 — forest cat has no ΔE cluster pairs in the [4,8] merge range" }
   ],
+  "per_cell_at_mt4": {
+    "n30_clean": { "seed1": 0.010, "seed2": 0.025, "seed3": 0.054, "median": 0.025, "baseline": 0.104, "delta_pct": -76 },
+    "n30_noisy": { "seed1": 0.555, "seed2": 0.690, "seed3": 0.653, "median": 0.653, "baseline": 0.656, "delta_pct": -0.5 }
+  },
   "observations": [
-    "First kept change after 9 probes across 5 iters: mergeThreshold 8→6 gives -4.6% global median.",
-    "Mechanism: narrower merge window preserves more clusters at the over-cluster stage; wins on cells where genuine color pairs were in the 6-8 ΔE gap.",
-    "Forest cat: unchanged at k=30. The improvement is synthetic-only; forest cat output is bit-identical to iter0 (same 8273 paths, same unique fills).",
-    "Exit criterion status: global improved -4.6%, but the exit criterion watches n30_clean specifically. Need per-cell verification that n30_clean ≥15% drop.",
-    "Remaining candidates: mergeThreshold 4, 5, 7 (fine-grain around the new winner); minClusterFraction <<0.0005; combinations with denoiseRadius=2 (conditional on noise)."
+    "mergeThreshold is the dominant knob for synthetic quality. 8 (default) was too aggressive; 4 preserves genuine cluster distinctions while still merging noise-duplicates. Below 4 is the floor (no pairs closer than ΔE=4 exist in the over-clustered output).",
+    "n30_clean went from 0.104 → 0.025 (-76%), comfortably past the 15% exit threshold.",
+    "n30_noisy essentially unchanged — mergeThreshold doesn't help when clusters are genuinely wrong from noise-induced k-means drift.",
+    "Forest cat unaffected by mergeThreshold change (same 8273 paths, 30 unique fills, bit-identical SVG). Forest cat's cluster centers aren't within the [4, 8] ΔE gap — it's well-separated enough that the narrower merge window doesn't change its behavior.",
+    "Exit criterion: n30_clean ≥15% drop ✓ ACHIEVED (-76%). Forest cat visibly more distinct colors ✗ NOT achieved — forest cat's ceiling under this pipeline is reached; further gains require algorithmic changes (per-image k, salient quantization, etc.)."
   ],
-  "nokept_streak": 0,
-  "next_probe": "mergeThreshold: 6 → 4 (continue downward to find the floor)"
+  "exit_status": "Half-satisfied: synthetic exit met; forest-cat exit not met. Recommend stopping parameter tuning (mergeThreshold=4 is the new kept default) and opening a slice for forest-cat-specific improvement.",
+  "nokept_streak": 0
 }

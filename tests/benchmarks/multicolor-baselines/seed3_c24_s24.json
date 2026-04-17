@@ -135,7 +135,7 @@
     ]
   },
   "output": {
-    "k": 25,
+    "k": 26,
     "palette": [
       "#ffffff",
       "#72df20",
@@ -150,7 +150,7 @@
       "#df8d20",
       "#20df8d",
       "#20a2df",
-      "#38df26",
+      "#42df20",
       "#20dfbd",
       "#2e20df",
       "#df2072",
@@ -161,6 +161,7 @@
       "#20df5d",
       "#df5d20",
       "#72dfdf",
+      "#20df2e",
       "#a2df20"
     ],
     "layerPixelCounts": [
@@ -177,7 +178,7 @@
       320,
       141,
       59,
-      492,
+      304,
       236,
       448,
       99,
@@ -188,15 +189,16 @@
       132,
       58,
       4,
+      188,
       29
     ],
     "svgByteLength": 10956
   },
   "loss": {
-    "paletteMatch": 0.9566063378404063,
-    "coverageIoU": 0.9092727456134396,
-    "centroidError": 0.010708664722138913,
-    "loss": 0.0637919585293315,
+    "paletteMatch": 1,
+    "coverageIoU": 0.9656592634414896,
+    "centroidError": 0.00014418521944283298,
+    "loss": 0.017184786801199503,
     "matches": [
       7,
       19,
@@ -210,10 +212,10 @@
       10,
       2,
       20,
-      24,
+      25,
       1,
       13,
-      23,
+      24,
       21,
       11,
       14,
@@ -310,15 +312,15 @@
       },
       {
         "truthColor": "#42df20",
-        "matchedColor": "#38df26",
-        "iou": 0.6129032258064516,
-        "centroidDistPx": 27.792050005219668
+        "matchedColor": "#42df20",
+        "iou": 0.987012987012987,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#20df2e",
-        "matchedColor": "#72dfdf",
-        "iou": 0,
-        "centroidDistPx": 64.00195309519859
+        "matchedColor": "#20df2e",
+        "iou": 0.9791666666666666,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#20df5d",
@@ -370,5 +372,5 @@
       }
     ]
   },
-  "timingMs": 248.87948099999994
+  "timingMs": 245.90126699999928
 }
