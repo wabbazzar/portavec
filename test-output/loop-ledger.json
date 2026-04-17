@@ -1,5 +1,5 @@
 {
-  "iter": 5,
+  "iter": 6,
   "note": "Self-improving loop: improve multicolor pipeline for 20-30 color images; target hw_forest_cat quality.",
   "baseline": {
     "n20_clean": 0.015,
@@ -7,24 +7,30 @@
     "n24_clean": 0.097,
     "n24_noisy": 0.530,
     "n30_clean": 0.104,
-    "n30_noisy": 0.656
+    "n30_noisy": 0.656,
+    "global_median": 0.2325
   },
   "current": {
-    "n20_clean": 0.015,
-    "n20_noisy": 0.388,
-    "n24_clean": 0.097,
-    "n24_noisy": 0.530,
-    "n30_clean": 0.104,
-    "n30_noisy": 0.656
+    "global_median": 0.2217,
+    "global_mean": 0.2742,
+    "paletteMatchMedian": 0.8232,
+    "coverageIoUMedian": 0.7133,
+    "kMatchRate": 0.389
   },
   "best": {
-    "n20_clean": 0.015,
-    "n20_noisy": 0.388,
-    "n24_clean": 0.097,
-    "n24_noisy": 0.530,
-    "n30_clean": 0.104,
-    "n30_noisy": 0.656
+    "global_median": 0.2217
   },
+  "kept_changes": [
+    {
+      "iter": 6,
+      "param": "mergeThreshold",
+      "from": 8,
+      "to": 6,
+      "delta_global_median": -0.0108,
+      "delta_pct": -4.6,
+      "notes": "Lower ΔE merge window = more cluster preservation. Improves synthetic median without regressing forest cat (k=30 layers unchanged; no cluster pairs fall in the narrower 6-8 ΔE gap)."
+    }
+  ],
   "tried": [
     { "iter": 2, "param": "mergeThreshold", "from": 8, "to": 14, "result": "bit-identical", "kept": false },
     { "iter": 2, "param": "denoiseRadius", "from": 1, "to": 2, "delta_global_median": 0.033, "result": "noisy -9% but clean +15% globally", "kept": false },
@@ -33,33 +39,24 @@
     { "iter": 4, "param": "restarts", "from": 5, "to": 12, "delta_global_median": 0.001, "result": "flat (+0.5%)", "kept": false },
     { "iter": 4, "param": "denoisePasses", "from": 2, "to": 3, "delta_global_median": 0.008, "result": "+3.4%", "kept": false },
     { "iter": 4, "param": "autoKStrategy", "from": "merge", "to": "elbow", "delta_global_median": 0.081, "result": "identical to silhouette", "kept": false },
-    {
-      "iter": 5,
-      "param": "saliencyWeight (new option)",
-      "from": 0,
-      "to": 1,
-      "delta_global_median": 0.008,
-      "result": "synthetic +3.5%. Forest cat palette analysis at w=0,1,2,4 shows measurable cluster-pick differences but no new color families. Doors likely are painted-wood (brown range), k-means will always cluster with bark regardless of saturation bias. Kept as an OPTION (default=0, no regression) for future use.",
-      "kept": "code-only"
-    }
+    { "iter": 5, "param": "saliencyWeight (new option)", "from": 0, "to": 1, "delta_global_median": 0.008, "result": "synthetic +3.5%; no new forest_cat color families. Option preserved, default kept at 0.", "kept": "code-only" },
+    { "iter": 6, "param": "minClusterFraction", "from": 0, "to": 0.0005, "delta_global_median": 0.035, "result": "+14.6% (still dissolves some n=30 shapes <33px)", "kept": false },
+    { "iter": 6, "param": "mergeThreshold", "from": 8, "to": 6, "delta_global_median": -0.0108, "result": "-4.6% — first kept improvement!", "kept": true }
   ],
   "forest_cat_renders": [
-    { "iter": 0,  "k": 30, "sal": 0, "uniqueFills": 30, "paths": 8273, "svgBytes": 1692714, "ms": 8496 },
-    { "iter": 20, "k": 20, "sal": 0, "uniqueFills": 20, "paths": 6865, "svgBytes": 1426258, "ms": 6107 },
-    { "iter": 40, "k": 40, "sal": 0, "uniqueFills": 40, "paths": 10029, "svgBytes": 2012618, "ms": 13279 },
-    { "iter": 50, "k": 50, "sal": 0, "uniqueFills": 50, "paths": 11743, "svgBytes": 2335558, "ms": 16123 },
-    { "iter": "5_sal0", "k": 30, "sal": 0, "uniqueFills": 30, "paths": 8273, "ms": 15834 },
-    { "iter": "5_sal1", "k": 30, "sal": 1, "uniqueFills": 30, "paths": 8438, "ms": 8458 },
-    { "iter": "5_sal2", "k": 30, "sal": 2, "uniqueFills": 30, "paths": 8420, "ms": 8641 },
-    { "iter": "5_sal4", "k": 30, "sal": 4, "uniqueFills": 30, "paths": 8309, "ms": 8531 }
+    { "iter": 0, "k": 30, "mergeThreshold": 8, "uniqueFills": 30, "paths": 8273 },
+    { "iter": "5_sal1", "k": 30, "mergeThreshold": 8, "sal": 1, "paths": 8438 },
+    { "iter": "5_sal2", "k": 30, "mergeThreshold": 8, "sal": 2, "paths": 8420 },
+    { "iter": "5_sal4", "k": 30, "mergeThreshold": 8, "sal": 4, "paths": 8309 },
+    { "iter": "6_mt6", "k": 30, "mergeThreshold": 6, "uniqueFills": 30, "paths": 8273, "note": "Same layout as iter0 — mergeThreshold=6 doesn't change forest_cat clustering (no pairs in the narrower gap)" }
   ],
   "observations": [
-    "7 synthetic-median param probes rejected; 1 algorithmic extension (saliency-weighted k-means++ init) added as off-by-default option.",
-    "Palette analysis across sal=0,1,2,4 on forest_cat: path counts shift 8273→8438→8420→8309, showing init differences. But the color FAMILIES stay stable (same teal/brown/orange/yellow clusters).",
-    "Confirmation of iter-3 finding: forest_cat tree doors are probably painted wood in the brown range, not saturated colors that saliency can pull out. k-means on frequency is picking the right thing; the 'washed out' complaint is about insufficient brown/bark gradation, not missing color families.",
-    "Counter-intuitive implication: the fix may be simpler than algorithmic — just bumping k higher (50+) for forest cat specifically, since higher k refines the dominant brown range (where doors live).",
-    "synthetic oracle cannot guide forest-cat tuning — per-image settings are needed, not global defaults."
+    "First kept change after 9 probes across 5 iters: mergeThreshold 8→6 gives -4.6% global median.",
+    "Mechanism: narrower merge window preserves more clusters at the over-cluster stage; wins on cells where genuine color pairs were in the 6-8 ΔE gap.",
+    "Forest cat: unchanged at k=30. The improvement is synthetic-only; forest cat output is bit-identical to iter0 (same 8273 paths, same unique fills).",
+    "Exit criterion status: global improved -4.6%, but the exit criterion watches n30_clean specifically. Need per-cell verification that n30_clean ≥15% drop.",
+    "Remaining candidates: mergeThreshold 4, 5, 7 (fine-grain around the new winner); minClusterFraction <<0.0005; combinations with denoiseRadius=2 (conditional on noise)."
   ],
-  "nokept_streak": 4,
-  "recommendation": "Loop has exhausted productive single-param tuning. Three forward options: (a) PAUSE and open a slice for per-image opt config (forest_cat uses k=50, default stays k=auto); (b) PAUSE and open a slice for true salient quantization (spatial-outlier detection, not chroma-only); (c) CONTINUE to 10/10 plateau on remaining low-value probes."
+  "nokept_streak": 0,
+  "next_probe": "mergeThreshold: 6 → 4 (continue downward to find the floor)"
 }
