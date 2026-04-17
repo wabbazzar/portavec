@@ -1,0 +1,736 @@
+{
+  "generatedAt": "2026-04-17T15:45:20.070Z",
+  "entries": {
+    "seed1_n12": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.04695723154671194,
+        "scoreType": "loss",
+        "paths": 23,
+        "uniqueFills": 13,
+        "ms": 126
+      },
+      "runCount": 16
+    },
+    "seed1_n12_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.12662269767664514,
+        "scoreType": "loss",
+        "paths": 56,
+        "uniqueFills": 50,
+        "ms": 625
+      },
+      "runCount": 16
+    },
+    "seed1_n12_grad": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.4278650969564515,
+        "scoreType": "loss",
+        "paths": 98,
+        "uniqueFills": 50,
+        "ms": 737
+      },
+      "runCount": 16
+    },
+    "seed1_n12_grad_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.6038570301112183,
+        "scoreType": "loss",
+        "paths": 47,
+        "uniqueFills": 50,
+        "ms": 596
+      },
+      "runCount": 16
+    },
+    "seed1_n12_grad_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.4949535122744665,
+        "scoreType": "loss",
+        "paths": 2678,
+        "uniqueFills": 50,
+        "ms": 1058
+      },
+      "runCount": 16
+    },
+    "seed1_n12_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.24803314935504173,
+        "scoreType": "loss",
+        "paths": 1425,
+        "uniqueFills": 20,
+        "ms": 386
+      },
+      "runCount": 16
+    },
+    "seed1_n16": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 30,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.024190922004688642,
+        "scoreType": "loss",
+        "paths": 35,
+        "uniqueFills": 20,
+        "ms": 248
+      },
+      "runCount": 16
+    },
+    "seed1_n16_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 40,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.09293212670448958,
+        "scoreType": "loss",
+        "paths": 71,
+        "uniqueFills": 40,
+        "ms": 442
+      },
+      "runCount": 16
+    },
+    "seed1_n16_grad": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.43763112212093325,
+        "scoreType": "loss",
+        "paths": 157,
+        "uniqueFills": 50,
+        "ms": 800
+      },
+      "runCount": 16
+    },
+    "seed1_n16_grad_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.5960373670968615,
+        "scoreType": "loss",
+        "paths": 72,
+        "uniqueFills": 50,
+        "ms": 610
+      },
+      "runCount": 16
+    },
+    "seed1_n16_grad_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.5888979993453427,
+        "scoreType": "loss",
+        "paths": 3844,
+        "uniqueFills": 50,
+        "ms": 1030
+      },
+      "runCount": 16
+    },
+    "seed1_n16_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.2576060616269529,
+        "scoreType": "loss",
+        "paths": 4692,
+        "uniqueFills": 50,
+        "ms": 1054
+      },
+      "runCount": 16
+    },
+    "seed1_n2": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 3.083067770837111e-05,
+        "scoreType": "loss",
+        "paths": 4,
+        "uniqueFills": 4,
+        "ms": 136
+      },
+      "runCount": 16
+    },
+    "seed1_n20": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 30,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.026739583183141624,
+        "scoreType": "loss",
+        "paths": 41,
+        "uniqueFills": 25,
+        "ms": 222
+      },
+      "runCount": 16
+    },
+    "seed1_n20_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.3311357352878379,
+        "scoreType": "loss",
+        "paths": 6314,
+        "uniqueFills": 50,
+        "ms": 1055
+      },
+      "runCount": 16
+    },
+    "seed1_n24": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 40,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.02362145473530175,
+        "scoreType": "loss",
+        "paths": 47,
+        "uniqueFills": 31,
+        "ms": 389
+      },
+      "runCount": 16
+    },
+    "seed1_n24_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.34292546420020253,
+        "scoreType": "loss",
+        "paths": 3899,
+        "uniqueFills": 50,
+        "ms": 1036
+      },
+      "runCount": 16
+    },
+    "seed1_n2_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.007505647108124736,
+        "scoreType": "loss",
+        "paths": 34,
+        "uniqueFills": 20,
+        "ms": 143
+      },
+      "runCount": 16
+    },
+    "seed1_n2_grad": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.37052614342602186,
+        "scoreType": "loss",
+        "paths": 31,
+        "uniqueFills": 20,
+        "ms": 196
+      },
+      "runCount": 16
+    },
+    "seed1_n2_grad_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.5949940492469038,
+        "scoreType": "loss",
+        "paths": 28,
+        "uniqueFills": 20,
+        "ms": 146
+      },
+      "runCount": 16
+    },
+    "seed1_n2_grad_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.26920356741771334,
+        "scoreType": "loss",
+        "paths": 2201,
+        "uniqueFills": 20,
+        "ms": 394
+      },
+      "runCount": 16
+    },
+    "seed1_n2_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.27504285838269216,
+        "scoreType": "loss",
+        "paths": 3738,
+        "uniqueFills": 20,
+        "ms": 385
+      },
+      "runCount": 16
+    },
+    "seed1_n30": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.03086007098156185,
+        "scoreType": "loss",
+        "paths": 60,
+        "uniqueFills": 43,
+        "ms": 562
+      },
+      "runCount": 16
+    },
+    "seed1_n30_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.44999422385191856,
+        "scoreType": "loss",
+        "paths": 4708,
+        "uniqueFills": 50,
+        "ms": 1078
+      },
+      "runCount": 16
+    },
+    "seed1_n4": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.001608160446630591,
+        "scoreType": "loss",
+        "paths": 9,
+        "uniqueFills": 6,
+        "ms": 234
+      },
+      "runCount": 16
+    },
+    "seed1_n4_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.01738001010309631,
+        "scoreType": "loss",
+        "paths": 50,
+        "uniqueFills": 20,
+        "ms": 149
+      },
+      "runCount": 16
+    },
+    "seed1_n4_grad": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.3014182335908552,
+        "scoreType": "loss",
+        "paths": 36,
+        "uniqueFills": 20,
+        "ms": 223
+      },
+      "runCount": 16
+    },
+    "seed1_n4_grad_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.6023693922507786,
+        "scoreType": "loss",
+        "paths": 38,
+        "uniqueFills": 50,
+        "ms": 549
+      },
+      "runCount": 16
+    },
+    "seed1_n4_grad_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 40,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.3602060706600305,
+        "scoreType": "loss",
+        "paths": 4571,
+        "uniqueFills": 40,
+        "ms": 798
+      },
+      "runCount": 16
+    },
+    "seed1_n4_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.12984547766447108,
+        "scoreType": "loss",
+        "paths": 3322,
+        "uniqueFills": 20,
+        "ms": 358
+      },
+      "runCount": 16
+    },
+    "seed1_n6": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.004578196201151852,
+        "scoreType": "loss",
+        "paths": 14,
+        "uniqueFills": 9,
+        "ms": 204
+      },
+      "runCount": 16
+    },
+    "seed1_n6_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.029570185005451166,
+        "scoreType": "loss",
+        "paths": 71,
+        "uniqueFills": 20,
+        "ms": 158
+      },
+      "runCount": 16
+    },
+    "seed1_n6_grad": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 40,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.33246341191033046,
+        "scoreType": "loss",
+        "paths": 93,
+        "uniqueFills": 40,
+        "ms": 517
+      },
+      "runCount": 16
+    },
+    "seed1_n6_grad_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.5182646308261747,
+        "scoreType": "loss",
+        "paths": 47,
+        "uniqueFills": 50,
+        "ms": 534
+      },
+      "runCount": 16
+    },
+    "seed1_n6_grad_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 40,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.47893499198527634,
+        "scoreType": "loss",
+        "paths": 4478,
+        "uniqueFills": 40,
+        "ms": 776
+      },
+      "runCount": 16
+    },
+    "seed1_n6_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.12263141657333088,
+        "scoreType": "loss",
+        "paths": 2238,
+        "uniqueFills": 20,
+        "ms": 384
+      },
+      "runCount": 16
+    },
+    "seed1_n8": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.004779008772269111,
+        "scoreType": "loss",
+        "paths": 17,
+        "uniqueFills": 11,
+        "ms": 156
+      },
+      "runCount": 16
+    },
+    "seed1_n8_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 30,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.028194419110701308,
+        "scoreType": "loss",
+        "paths": 61,
+        "uniqueFills": 30,
+        "ms": 264
+      },
+      "runCount": 16
+    },
+    "seed1_n8_grad": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 30,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.3297175648133984,
+        "scoreType": "loss",
+        "paths": 70,
+        "uniqueFills": 30,
+        "ms": 333
+      },
+      "runCount": 16
+    },
+    "seed1_n8_grad_aa": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 50,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.5679131970610403,
+        "scoreType": "loss",
+        "paths": 55,
+        "uniqueFills": 50,
+        "ms": 528
+      },
+      "runCount": 16
+    },
+    "seed1_n8_grad_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 40,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": 0.44359067278356523,
+        "scoreType": "loss",
+        "paths": 2597,
+        "uniqueFills": 40,
+        "ms": 772
+      },
+      "runCount": 16
+    },
+    "seed1_n8_noisy": {
+      "hasTruth": true,
+      "best": {
+        "config": {
+          "k": 30,
+          "saliencyWeight": 1,
+          "salientSeedBudget": 0,
+          "mergeThreshold": 4
+        },
+        "score": 0.1267871603550439,
+        "scoreType": "loss",
+        "paths": 3566,
+        "uniqueFills": 30,
+        "ms": 557
+      },
+      "runCount": 16
+    },
+    "hw_forest_cat": {
+      "hasTruth": false,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": -388.4689158667083,
+        "scoreType": "chromaSpread",
+        "paths": 6939,
+        "uniqueFills": 20,
+        "ms": 6035
+      },
+      "runCount": 16
+    }
+  }
+}
