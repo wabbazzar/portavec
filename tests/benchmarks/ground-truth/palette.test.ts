@@ -37,7 +37,7 @@ describe('pickPalette', () => {
 
   it('rejects out-of-range n', () => {
     expect(() => pickPalette(mulberry32(1), 0)).toThrow();
-    expect(() => pickPalette(mulberry32(1), 17)).toThrow();
+    expect(() => pickPalette(mulberry32(1), 31)).toThrow();
     expect(() => pickPalette(mulberry32(1), 1.5)).toThrow();
   });
 

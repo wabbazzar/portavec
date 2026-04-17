@@ -28,6 +28,11 @@ export interface ChooseKOptions {
    * linear CPU cost.
    */
   restarts?: number;
+  /**
+   * When true, skip the silhouette pass and pick k purely from WCSS
+   * relative-drop (classical elbow). Faster; more conservative on k.
+   */
+  pureElbow?: boolean;
 }
 
 export interface ChooseKResult {
@@ -68,6 +73,23 @@ export function chooseK(imageData: ImageData, opts: ChooseKOptions): ChooseKResu
       const silhouetteByK = new Array(maxK + 1).fill(NaN);
       return { k, wcssByK, silhouetteByK, pickedBy: 'zero-drop' };
     }
+  }
+
+  // ----- Pure-elbow shortcut (skips silhouette) -----
+  if (opts.pureElbow) {
+    const silhouetteByK = new Array(maxK + 1).fill(NaN);
+    let fbK = 1;
+    let bestDrop = -Infinity;
+    for (let k = 2; k <= maxK; k++) {
+      const prev = wcssByK[k - 1]!;
+      if (prev <= 0) continue;
+      const drop = (prev - wcssByK[k]!) / prev;
+      if (drop > bestDrop) {
+        bestDrop = drop;
+        fbK = k;
+      }
+    }
+    return { k: fbK, wcssByK, silhouetteByK, pickedBy: 'relative-drop' };
   }
 
   // ----- Silhouette pass -----

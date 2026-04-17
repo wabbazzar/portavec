@@ -28,14 +28,17 @@ function main(): void {
   const iter = process.argv[2] ?? '0';
   const kArg = process.argv[3];
   const salArg = process.argv[4];
+  const budgetArg = process.argv[5];
   const k = kArg != null ? Number(kArg) : undefined;
   const saliencyWeight = salArg != null ? Number(salArg) : undefined;
+  const salientSeedBudget = budgetArg != null ? Number(budgetArg) : undefined;
 
   const pngBuf = readFileSync('public/training/hw_forest_cat.png');
   const img = pngToImageData(pngBuf);
   const opts: Record<string, number> = {};
   if (k != null) opts.k = k;
   if (saliencyWeight != null) opts.saliencyWeight = saliencyWeight;
+  if (salientSeedBudget != null) opts.salientSeedBudget = salientSeedBudget;
   const t0 = Date.now();
   const result = runMultiColorPipeline(img, opts);
   const ms = Date.now() - t0;

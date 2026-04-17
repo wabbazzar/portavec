@@ -71,3 +71,38 @@ function medianOnce(imageData: ImageData, radius: number): ImageData {
   }
   return { data: out, width: W, height: H, colorSpace: 'srgb' } as unknown as ImageData;
 }
+
+/**
+ * Estimate additive Gaussian noise σ in the luma channel via Laplacian MAD.
+ *
+ * Method:
+ *   1. Compute the 4-neighbor Laplacian L(x,y) = 4*Y - Y(x-1) - Y(x+1) - Y(y-1) - Y(y+1).
+ *   2. Take the absolute values, find the median (MAD, median absolute deviation).
+ *   3. σ ≈ MAD / 0.6745 (Gaussian consistency constant).
+ *
+ * Returns σ in 0..255 range. Clean images yield σ ≈ 0-2; JPEG-compressed
+ * ~3-8; heavily noisy ~15+. A ~1% strided sample keeps cost small.
+ */
+export function estimateNoiseSigma(imageData: ImageData, stride: number = 4): number {
+  const W = imageData.width;
+  const H = imageData.height;
+  const data = imageData.data;
+  const samples: number[] = [];
+  for (let y = 1; y < H - 1; y += stride) {
+    for (let x = 1; x < W - 1; x += stride) {
+      const y00 = 0.299 * data[(y * W + x) * 4]! + 0.587 * data[(y * W + x) * 4 + 1]! + 0.114 * data[(y * W + x) * 4 + 2]!;
+      const yL = 0.299 * data[(y * W + x - 1) * 4]! + 0.587 * data[(y * W + x - 1) * 4 + 1]! + 0.114 * data[(y * W + x - 1) * 4 + 2]!;
+      const yR = 0.299 * data[(y * W + x + 1) * 4]! + 0.587 * data[(y * W + x + 1) * 4 + 1]! + 0.114 * data[(y * W + x + 1) * 4 + 2]!;
+      const yU = 0.299 * data[((y - 1) * W + x) * 4]! + 0.587 * data[((y - 1) * W + x) * 4 + 1]! + 0.114 * data[((y - 1) * W + x) * 4 + 2]!;
+      const yD = 0.299 * data[((y + 1) * W + x) * 4]! + 0.587 * data[((y + 1) * W + x) * 4 + 1]! + 0.114 * data[((y + 1) * W + x) * 4 + 2]!;
+      samples.push(Math.abs(4 * y00 - yL - yR - yU - yD));
+    }
+  }
+  if (samples.length === 0) return 0;
+  samples.sort((a, b) => a - b);
+  const mad = samples[samples.length >> 1]!;
+  // Consistency constant for Gaussian + Laplacian has an extra factor:
+  // σ ≈ MAD / (0.6745 * sqrt(6)). But we want a simple monotone signal,
+  // so apply the standard MAD-to-σ and treat thresholds empirically.
+  return mad / (0.6745 * Math.sqrt(6));
+}

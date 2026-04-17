@@ -120,76 +120,76 @@
       "#ffffff",
       "#9f20df",
       "#df2074",
-      "#df3f20",
+      "#df203a",
       "#dfb220",
       "#27df20",
-      "#20c0df",
-      "#2087df",
-      "#2c20df",
-      "#204ddf",
-      "#df7820",
-      "#df203a",
-      "#df20ad",
-      "#d3df20",
-      "#20df8b",
-      "#20dfc5",
       "#d820df",
+      "#20dfc5",
+      "#2c20df",
+      "#df7820",
+      "#204ddf",
+      "#df3f20",
+      "#20c0df",
+      "#d3df20",
+      "#2087df",
+      "#20df8b",
+      "#df20ad",
       "#9adf20",
       "#6520df",
       "#20df52",
       "#60df20"
     ],
     "layerPixelCounts": [
-      56893,
+      56841,
       716,
-      500,
-      1264,
+      504,
+      616,
       256,
       1396,
-      387,
-      200,
-      1020,
-      912,
       256,
-      616,
-      51,
-      157,
-      41,
       316,
+      1020,
       256,
-      74,
-      111,
-      63,
-      51
+      912,
+      1264,
+      391,
+      161,
+      204,
+      47,
+      57,
+      80,
+      117,
+      68,
+      58
     ],
-    "svgByteLength": 10153
+    "svgByteLength": 9733
   },
   "loss": {
     "paletteMatch": 1,
-    "coverageIoU": 0.9691978449409607,
-    "centroidError": 0.0000805880823444281,
-    "loss": 0.015409136337753981,
+    "coverageIoU": 1,
+    "centroidError": 0,
+    "loss": 0,
     "matches": [
-      9,
+      10,
       8,
       18,
       1,
+      6,
       16,
-      12,
       2,
-      11,
       3,
-      10,
+      11,
+      9,
       4,
       13,
       17,
       20,
       5,
       19,
-      14,
       15,
-      6,
-      7
+      7,
+      12,
+      14
     ],
     "perShape": [
       {
@@ -207,8 +207,8 @@
       {
         "truthColor": "#6520df",
         "matchedColor": "#6520df",
-        "iou": 0.9487179487179487,
-        "centroidDistPx": 0.006355655575048253
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#9f20df",
@@ -225,13 +225,13 @@
       {
         "truthColor": "#df20ad",
         "matchedColor": "#df20ad",
-        "iou": 0.8947368421052632,
-        "centroidDistPx": 0.029551746260631864
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#df2074",
         "matchedColor": "#df2074",
-        "iou": 0.9920634920634921,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
@@ -261,20 +261,20 @@
       {
         "truthColor": "#d3df20",
         "matchedColor": "#d3df20",
-        "iou": 0.9751552795031055,
-        "centroidDistPx": 0.10431922066007168
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#9adf20",
         "matchedColor": "#9adf20",
-        "iou": 0.925,
-        "centroidDistPx": 0.022287057435770804
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#60df20",
         "matchedColor": "#60df20",
-        "iou": 0.8793103448275862,
-        "centroidDistPx": 0.14423707065499866
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#27df20",
@@ -285,14 +285,14 @@
       {
         "truthColor": "#20df52",
         "matchedColor": "#20df52",
-        "iou": 0.9264705882352942,
-        "centroidDistPx": 0.06782401580161526
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#20df8b",
         "matchedColor": "#20df8b",
-        "iou": 0.8723404255319149,
-        "centroidDistPx": 0.20894527977956903
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#20dfc5",
@@ -303,16 +303,16 @@
       {
         "truthColor": "#20c0df",
         "matchedColor": "#20c0df",
-        "iou": 0.989769820971867,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#2087df",
         "matchedColor": "#2087df",
-        "iou": 0.9803921568627451,
+        "iou": 1,
         "centroidDistPx": 0
       }
     ]
   },
-  "timingMs": 893.180163
+  "timingMs": 754.4368979999999
 }

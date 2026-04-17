@@ -19,6 +19,8 @@ import {
   medianDenoise,
   mergeNearClusters,
   mergeGradientCoupled,
+  findSalientSeeds,
+  estimateNoiseSigma,
 } from './quantize';
 import type { QuantizeResult } from './quantize';
 import { traceContours } from './contour-tracing';
@@ -55,12 +57,15 @@ export interface MultiColorOptions {
   restarts?: number;
   /**
    * Auto-k strategy:
-   *   'silhouette' — elbow + silhouette plateau edge (default for
-   *       clean-ish images where silhouette saturates cleanly)
+   *   'silhouette' — hybrid: zero-drop → silhouette plateau edge →
+   *       WCSS relative-drop fallback. Best on clean-ish images where
+   *       silhouette saturates cleanly.
+   *   'elbow'      — pure WCSS relative-drop (classical elbow). Faster
+   *       than silhouette, more conservative on k.
    *   'merge'      — over-cluster at maxK then merge near-duplicate
-   *       centers (robust on noisy data where silhouette is ambiguous)
+   *       centers. Robust on noisy data where silhouette is ambiguous.
    */
-  autoKStrategy?: 'silhouette' | 'merge';
+  autoKStrategy?: 'silhouette' | 'elbow' | 'merge';
   /**
    * ΔE below which two cluster centers are merged in 'merge' mode.
    * Lower = more aggressive cluster preservation.
@@ -91,6 +96,21 @@ export interface MultiColorOptions {
    * absorbed by dominant muted surroundings. 0 = vanilla k-means++.
    */
   saliencyWeight?: number;
+  /**
+   * Number of salient-color seeds to reserve before k-means++ init.
+   * Uses `findSalientSeeds` (hue-histogram chromatic-rarity picker) to
+   * find distinctive colors, then guarantees they're in the final palette.
+   * 0 = off; a reasonable value is ~k/4 or min(8, k/4). Default 0.
+   */
+  salientSeedBudget?: number;
+  /**
+   * Denoise mode:
+   *   'static'   — use `denoiseRadius`/`denoisePasses` as given.
+   *   'adaptive' — estimate image noise σ via Laplacian MAD and pick
+   *                radius in {0, 1, 2} proportional to σ. Overrides
+   *                `denoiseRadius`. Clean images skip denoise entirely.
+   */
+  denoiseMode?: 'static' | 'adaptive';
 }
 
 export interface ColorLayer {
@@ -115,7 +135,7 @@ export interface MultiColorResult {
 }
 
 const DEFAULT_OPTS: Required<Pick<MultiColorOptions,
-  'seed' | 'maxK' | 'denoiseRadius' | 'denoisePasses' | 'restarts' | 'autoKStrategy' | 'mergeThreshold' | 'minClusterFraction' | 'gradientCoupleThreshold' | 'gradientCoupleDeMax' | 'minContourLength' | 'simplifyTolerance' | 'curveTolerance' | 'saliencyWeight'
+  'seed' | 'maxK' | 'denoiseRadius' | 'denoisePasses' | 'restarts' | 'autoKStrategy' | 'mergeThreshold' | 'minClusterFraction' | 'gradientCoupleThreshold' | 'gradientCoupleDeMax' | 'minContourLength' | 'simplifyTolerance' | 'curveTolerance' | 'saliencyWeight' | 'salientSeedBudget' | 'denoiseMode'
 >> = {
   seed: 17,
   maxK: 32,
@@ -134,6 +154,8 @@ const DEFAULT_OPTS: Required<Pick<MultiColorOptions,
   simplifyTolerance: 0.3,
   curveTolerance: 1.2,
   saliencyWeight: 1,
+  salientSeedBudget: 0,
+  denoiseMode: 'adaptive',
 };
 
 export function runMultiColorPipeline(
@@ -145,13 +167,28 @@ export function runMultiColorPipeline(
 
   // Pre-filter: edge-preserving denoise. Tightens color clusters on
   // noisy input; effectively a no-op on clean synthetic images.
+  // Adaptive mode picks radius from estimated noise σ; static uses
+  // user-supplied values.
+  let effectiveRadius = opts.denoiseRadius;
+  if (opts.denoiseMode === 'adaptive') {
+    const sigma = estimateNoiseSigma(imageData);
+    effectiveRadius = sigma < 3 ? 0 : sigma < 8 ? 1 : 2;
+  }
   const forQuantize =
-    opts.denoiseRadius > 0 && opts.denoisePasses > 0
+    effectiveRadius > 0 && opts.denoisePasses > 0
       ? medianDenoise(imageData, {
-          radius: opts.denoiseRadius,
+          radius: effectiveRadius,
           passes: opts.denoisePasses,
         })
       : imageData;
+
+  // Optional: find salient seeds (rare high-chroma hues) in the ORIGINAL
+  // image (not denoised — denoise can smooth away the rare pixels we
+  // want to preserve). Passed through to quantize as reserved cluster
+  // centers.
+  const reservedSeeds = opts.salientSeedBudget > 0
+    ? findSalientSeeds(imageData, opts.salientSeedBudget)
+    : [];
 
   // Quantize.
   let quant: QuantizeResult;
@@ -165,6 +202,7 @@ export function runMultiColorPipeline(
       sampleStride: opts.sampleStride,
       restarts: opts.restarts,
       saliencyWeight: opts.saliencyWeight,
+      reservedSeeds,
     });
   } else if (opts.autoKStrategy === 'merge') {
     // Over-cluster then merge close centers in Lab. Robust on noisy
@@ -175,6 +213,7 @@ export function runMultiColorPipeline(
       sampleStride: opts.sampleStride,
       restarts: opts.restarts,
       saliencyWeight: opts.saliencyWeight,
+      reservedSeeds,
     });
     const merged = mergeNearClusters(initial, {
       mergeThreshold: opts.mergeThreshold,
@@ -200,7 +239,7 @@ export function runMultiColorPipeline(
       maxK: opts.maxK,
       sampleStride: opts.sampleStride,
       restarts: opts.restarts,
-      saliencyWeight: opts.saliencyWeight,
+      pureElbow: opts.autoKStrategy === 'elbow',
     });
     k = auto.k;
     wcssByK = auto.wcssByK;

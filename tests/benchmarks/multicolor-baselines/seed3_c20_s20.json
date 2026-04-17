@@ -140,35 +140,35 @@
       "#2fdf20"
     ],
     "layerPixelCounts": [
-      60421,
-      106,
+      60337,
+      112,
       812,
-      356,
-      162,
+      360,
+      168,
+      400,
+      552,
+      180,
+      105,
+      191,
       396,
-      548,
-      176,
-      99,
-      185,
-      392,
-      217,
+      221,
       316,
-      90,
-      251,
-      203,
-      157,
-      61,
+      95,
+      255,
+      207,
+      161,
+      68,
       384,
-      172,
-      32
+      176,
+      40
     ],
-    "svgByteLength": 9331
+    "svgByteLength": 8491
   },
   "loss": {
     "paletteMatch": 1,
-    "coverageIoU": 0.9652611426799613,
-    "centroidError": 0.00016797642602898945,
-    "loss": 0.01738622630262221,
+    "coverageIoU": 1,
+    "centroidError": 0,
+    "loss": 0,
     "matches": [
       2,
       19,
@@ -201,7 +201,7 @@
       {
         "truthColor": "#9720df",
         "matchedColor": "#9720df",
-        "iou": 0.9772727272727273,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
@@ -213,97 +213,97 @@
       {
         "truthColor": "#df20b5",
         "matchedColor": "#df20b5",
-        "iou": 0.9428571428571428,
-        "centroidDistPx": 0.13999345264803087
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#df207b",
         "matchedColor": "#df207b",
-        "iou": 0.9806763285024155,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#df2042",
         "matchedColor": "#df2042",
-        "iou": 0.9464285714285714,
-        "centroidDistPx": 0.1411560212698206
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#df3720",
         "matchedColor": "#df3720",
-        "iou": 0.98989898989899,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#df7020",
         "matchedColor": "#df7020",
-        "iou": 0.9777777777777777,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#dfaa20",
         "matchedColor": "#dfaa20",
-        "iou": 0.8970588235294118,
-        "centroidDistPx": 0.13929169860094318
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#dbdf20",
         "matchedColor": "#dbdf20",
-        "iou": 0.99,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#a2df20",
         "matchedColor": "#a2df20",
-        "iou": 0.9685863874345549,
-        "centroidDistPx": 0.005978922771650906
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#68df20",
         "matchedColor": "#68df20",
-        "iou": 0.9473684210526315,
-        "centroidDistPx": 0.09807315690787433
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#2fdf20",
         "matchedColor": "#2fdf20",
-        "iou": 0.8,
-        "centroidDistPx": 0.3830898230180426
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#20df4a",
         "matchedColor": "#20df4a",
-        "iou": 0.9927536231884058,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#20df84",
         "matchedColor": "#20df84",
-        "iou": 0.9888888888888889,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#20dfbd",
         "matchedColor": "#20dfbd",
-        "iou": 0.9819004524886877,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#20c8df",
         "matchedColor": "#20c8df",
-        "iou": 0.9751552795031055,
-        "centroidDistPx": 0.19993165043792235
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#208fdf",
         "matchedColor": "#208fdf",
-        "iou": 0.9642857142857143,
-        "centroidDistPx": 0.10876451837340319
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#2055df",
         "matchedColor": "#2055df",
-        "iou": 0.984313725490196,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
@@ -314,5 +314,5 @@
       }
     ]
   },
-  "timingMs": 338.72461999999996
+  "timingMs": 363.7086220000001
 }

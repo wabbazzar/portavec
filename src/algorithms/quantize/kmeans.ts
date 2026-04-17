@@ -41,6 +41,13 @@ export interface QuantizeOptions {
    * photo dominated by bark tones). Default 0.
    */
   saliencyWeight?: number;
+  /**
+   * Pre-computed Lab centers to seed into the k-means++ init BEFORE the
+   * distance-weighted sampling runs. Guarantees these colors survive
+   * into the palette regardless of pixel frequency. Use with
+   * `findSalientSeeds` for salient-color preservation.
+   */
+  reservedSeeds?: Array<[number, number, number]>;
 }
 
 // Simple seeded PRNG here so kmeans.ts has no ground-truth dependency.
@@ -137,7 +144,7 @@ export function quantize(imageData: ImageData, opts: QuantizeOptions): QuantizeR
 }
 
 function quantizeOnce(imageData: ImageData, opts: QuantizeOptions): QuantizeResult {
-  const { k, seed, maxIters = 25, sampleStride = 1, saliencyWeight = 0 } = opts;
+  const { k, seed, maxIters = 25, sampleStride = 1, saliencyWeight = 0, reservedSeeds = [] } = opts;
   const N = imageData.width * imageData.height;
   const rand = mulberry32(seed);
 
@@ -168,8 +175,17 @@ function quantizeOnce(imageData: ImageData, opts: QuantizeOptions): QuantizeResu
 
   // --- k-means++ initialization ---
   const centroids: Array<[number, number, number]> = [];
-  const first = sampleIdx[Math.floor(rand() * sampleIdx.length)]!;
-  centroids.push([...labs[first]!]);
+  // Reserved seeds go in first (up to k) — these colors are guaranteed
+  // to be in the final palette regardless of pixel frequency. Source:
+  // saliency.ts finds low-frequency high-chroma hues.
+  for (const rs of reservedSeeds) {
+    if (centroids.length >= k) break;
+    centroids.push([rs[0], rs[1], rs[2]]);
+  }
+  if (centroids.length === 0) {
+    const first = sampleIdx[Math.floor(rand() * sampleIdx.length)]!;
+    centroids.push([...labs[first]!]);
+  }
 
   const dist = new Float64Array(sampleIdx.length);
   while (centroids.length < k) {

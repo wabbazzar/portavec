@@ -135,107 +135,105 @@
     ]
   },
   "output": {
-    "k": 26,
+    "k": 25,
     "palette": [
       "#ffffff",
-      "#72df20",
-      "#5d20df",
-      "#d1df20",
       "#2042df",
-      "#20d1df",
-      "#df2e20",
-      "#df2042",
-      "#df2072",
-      "#df20a2",
-      "#df8d20",
-      "#20a2df",
+      "#d1df20",
       "#20df8d",
-      "#2072df",
-      "#8d20df",
-      "#20dfbd",
       "#42df20",
+      "#df2042",
       "#bd20df",
-      "#dfbd20",
+      "#20d1df",
       "#df5d20",
+      "#5d20df",
+      "#df8d20",
+      "#2072df",
+      "#df2072",
       "#df20d1",
+      "#20dfbd",
+      "#dfbd20",
+      "#20a2df",
+      "#df2e20",
+      "#df20a2",
+      "#8d20df",
+      "#72df20",
       "#20df2e",
       "#a2df20",
       "#20df5d",
-      "#2e20df",
-      "#72dfdf"
+      "#2e20df"
     ],
     "layerPixelCounts": [
-      59825,
-      458,
-      722,
-      76,
-      458,
+      59744,
+      462,
+      81,
+      148,
+      308,
+      357,
       316,
-      149,
-      353,
-      99,
-      185,
-      320,
-      59,
-      141,
+      316,
+      65,
+      716,
+      324,
       256,
-      161,
-      236,
-      304,
-      316,
-      157,
-      58,
-      86,
-      188,
-      29,
-      132,
-      448,
-      4
+      105,
+      91,
+      240,
+      163,
+      63,
+      153,
+      189,
+      165,
+      462,
+      192,
+      36,
+      136,
+      448
     ],
-    "svgByteLength": 10956
+    "svgByteLength": 9901
   },
   "loss": {
     "paletteMatch": 1,
-    "coverageIoU": 0.9656592634414896,
-    "centroidError": 0.00014418521944283298,
-    "loss": 0.017184786801199503,
+    "coverageIoU": 1,
+    "centroidError": 0,
+    "loss": 0,
     "matches": [
-      2,
-      14,
-      17,
-      20,
       9,
-      8,
-      7,
-      6,
       19,
-      10,
+      6,
+      13,
       18,
-      3,
+      12,
+      5,
+      17,
+      8,
+      10,
+      15,
+      2,
       22,
-      1,
-      16,
+      20,
+      4,
       21,
       23,
-      12,
-      15,
-      5,
+      3,
+      14,
+      7,
+      16,
       11,
-      13,
-      4,
+      1,
       24
     ],
     "perShape": [
       {
         "truthColor": "#5d20df",
         "matchedColor": "#5d20df",
-        "iou": 0.9916897506925207,
-        "centroidDistPx": 0.12652489131976832
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#8d20df",
         "matchedColor": "#8d20df",
-        "iou": 0.9757575757575757,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
@@ -247,97 +245,97 @@
       {
         "truthColor": "#df20d1",
         "matchedColor": "#df20d1",
-        "iou": 0.945054945054945,
-        "centroidDistPx": 0.06402745158608146
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#df20a2",
         "matchedColor": "#df20a2",
-        "iou": 0.9788359788359788,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#df2072",
         "matchedColor": "#df2072",
-        "iou": 0.9428571428571428,
-        "centroidDistPx": 0.1407286741143251
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#df2042",
         "matchedColor": "#df2042",
-        "iou": 0.988795518207283,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#df2e20",
         "matchedColor": "#df2e20",
-        "iou": 0.9738562091503268,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#df5d20",
         "matchedColor": "#df5d20",
-        "iou": 0.8923076923076924,
-        "centroidDistPx": 0.0822388116600831
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#df8d20",
         "matchedColor": "#df8d20",
-        "iou": 0.9876543209876543,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#dfbd20",
         "matchedColor": "#dfbd20",
-        "iou": 0.9631901840490797,
-        "centroidDistPx": 0.006741642001274535
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#d1df20",
         "matchedColor": "#d1df20",
-        "iou": 0.9382716049382716,
-        "centroidDistPx": 0.10427597345123298
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#a2df20",
         "matchedColor": "#a2df20",
-        "iou": 0.8055555555555556,
-        "centroidDistPx": 0.260853143047552
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#72df20",
         "matchedColor": "#72df20",
-        "iou": 0.9913419913419913,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#42df20",
         "matchedColor": "#42df20",
-        "iou": 0.987012987012987,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#20df2e",
         "matchedColor": "#20df2e",
-        "iou": 0.9791666666666666,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
         "truthColor": "#20df5d",
         "matchedColor": "#20df5d",
-        "iou": 0.9705882352941176,
-        "centroidDistPx": 0.21883973654470248
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#20df8d",
         "matchedColor": "#20df8d",
-        "iou": 0.9527027027027027,
-        "centroidDistPx": 0.08619052704832038
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#20dfbd",
         "matchedColor": "#20dfbd",
-        "iou": 0.9833333333333333,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
@@ -349,8 +347,8 @@
       {
         "truthColor": "#20a2df",
         "matchedColor": "#20a2df",
-        "iou": 0.9365079365079365,
-        "centroidDistPx": 0.16239415797292175
+        "iou": 1,
+        "centroidDistPx": 0
       },
       {
         "truthColor": "#2072df",
@@ -361,7 +359,7 @@
       {
         "truthColor": "#2042df",
         "matchedColor": "#2042df",
-        "iou": 0.9913419913419913,
+        "iou": 1,
         "centroidDistPx": 0
       },
       {
@@ -372,5 +370,5 @@
       }
     ]
   },
-  "timingMs": 231.31115599999976
+  "timingMs": 306.5992130000004
 }

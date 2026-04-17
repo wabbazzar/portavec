@@ -105,7 +105,7 @@ describe('generateTruth', () => {
 
   it('rejects out-of-range shapeCount', () => {
     expect(() => generateTruth(input({ colors: 0 as any, shapeCount: 0 as any }))).toThrow();
-    expect(() => generateTruth(input({ colors: 17 as any, shapeCount: 17 as any }))).toThrow();
+    expect(() => generateTruth(input({ colors: 31 as any, shapeCount: 31 as any }))).toThrow();
   });
 
   it('allowOverlap=true produces some overlapping bboxes on avg', () => {

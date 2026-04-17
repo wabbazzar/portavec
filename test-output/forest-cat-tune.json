@@ -1,0 +1,22 @@
+{
+  "generatedAt": "2026-04-17T15:38:14.348Z",
+  "entries": {
+    "hw_forest_cat": {
+      "hasTruth": false,
+      "best": {
+        "config": {
+          "k": 20,
+          "saliencyWeight": 0,
+          "salientSeedBudget": 8,
+          "mergeThreshold": 4
+        },
+        "score": -388.4689158667083,
+        "scoreType": "chromaSpread",
+        "paths": 6939,
+        "uniqueFills": 20,
+        "ms": 6035
+      },
+      "runCount": 16
+    }
+  }
+}

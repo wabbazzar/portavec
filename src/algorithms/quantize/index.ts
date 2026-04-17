@@ -7,9 +7,10 @@ export type {
   AutoQuantizeOptions,
   AutoQuantizeResult,
 } from './elbow';
-export { medianDenoise } from './denoise';
+export { medianDenoise, estimateNoiseSigma } from './denoise';
 export type { DenoiseOptions } from './denoise';
 export { mergeNearClusters } from './merge';
 export type { MergeOptions, MergeResult } from './merge';
 export { mergeGradientCoupled } from './couple';
 export type { CoupleOptions, CoupleResult } from './couple';
+export { findSalientSeeds } from './saliency';
