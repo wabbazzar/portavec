@@ -4,6 +4,7 @@ import './DiffOverlay.css';
 
 const DIFF_MODES: { mode: DiffMode; label: string; icon: string }[] = [
   { mode: 'side-by-side', label: 'Side by Side', icon: '|||' },
+  { mode: 'slider', label: 'Before / After', icon: '⇌' },
   { mode: 'onion', label: 'Onion Skin', icon: '()' },
   { mode: 'difference', label: 'Difference', icon: '+-' },
   { mode: 'toggle', label: 'Toggle', icon: '<>' },

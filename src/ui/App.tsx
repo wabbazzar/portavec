@@ -119,8 +119,14 @@ function App() {
         <div className="header-actions">
           {sourceImage && (
             <>
-              <button className="primary" onClick={handleVectorize} disabled={isProcessing}>
-                {isProcessing ? 'Processing...' : 'Vectorize'}
+              <button
+                className={`primary vectorize-btn${isProcessing ? ' processing' : ''}`}
+                onClick={handleVectorize}
+                disabled={isProcessing}
+                aria-label={isProcessing ? 'Vectorizing' : 'Vectorize'}
+              >
+                {isProcessing && <span className="btn-spinner" aria-hidden />}
+                <span className="btn-label">{isProcessing ? 'Vectorizing…' : 'Vectorize'}</span>
               </button>
               <button className="secondary" onClick={handleAsciify}>
                 ASCIIify
@@ -138,7 +144,7 @@ function App() {
         </div>
       </header>
 
-      <main className="app-main">
+      <main className={`app-main${isProcessing ? ' processing' : ''}`}>
         {error && (
           <div className="error-banner">
             <span className="error-icon">!</span>

@@ -28,7 +28,7 @@ export interface Parameters {
   tuned: boolean;
 }
 
-export type DiffMode = 'side-by-side' | 'onion' | 'difference' | 'toggle';
+export type DiffMode = 'side-by-side' | 'slider' | 'onion' | 'difference' | 'toggle';
 export type SourceType = 'file' | 'benchmark';
 
 export interface AppState {

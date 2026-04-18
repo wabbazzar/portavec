@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useAppState } from './context/AppContext';
+import { BeforeAfterSlider } from './BeforeAfterSlider';
 import './ComparisonView.css';
 
 interface ImagePanelProps {
@@ -177,6 +178,18 @@ export function ComparisonView() {
       </button>
     </div>
   );
+
+  if (diffMode === 'slider') {
+    return (
+      <div className="comparison-view mode-slider">
+        <BeforeAfterSlider
+          sourceImage={sourceImage}
+          resultSvg={resultSvg}
+          resultRasterized={resultRasterized}
+        />
+      </div>
+    );
+  }
 
   return (
     <div className={`comparison-view mode-${diffMode}`}>
