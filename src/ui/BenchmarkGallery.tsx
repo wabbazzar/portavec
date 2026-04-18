@@ -58,7 +58,7 @@ export function BenchmarkGallery() {
   const [loading, setLoading] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch('/training/manifest.json')
+    fetch(`${import.meta.env.BASE_URL}training/manifest.json`)
       .then((r) => {
         if (!r.ok) throw new Error(`manifest ${r.status}`);
         return r.json();
@@ -66,7 +66,7 @@ export function BenchmarkGallery() {
       .then(setManifest)
       .catch((e) => setError(String(e)));
     // Tuning manifest is optional — if missing, images just use pipeline defaults.
-    fetch('/training/tuning-manifest.json')
+    fetch(`${import.meta.env.BASE_URL}training/tuning-manifest.json`)
       .then((r) => (r.ok ? r.json() : null))
       .then((m) => { if (m) setTuning(m); })
       .catch(() => { /* silent — tuning is best-effort */ });
@@ -85,7 +85,7 @@ export function BenchmarkGallery() {
   const loadByPng = async (name: string, png: string) => {
     setLoading(name);
     try {
-      const image = await loadImageFromUrl(`/training/${png}`);
+      const image = await loadImageFromUrl(`${import.meta.env.BASE_URL}training/${png}`);
       dispatch({
         type: 'SET_SOURCE_IMAGE',
         payload: { image, fileName: png, sourceType: 'benchmark' },
@@ -150,7 +150,7 @@ export function BenchmarkGallery() {
                   title={r.description}
                 >
                   <div className="gallery-tile-thumb">
-                    <img src={`/training/${r.png}`} alt={r.label} loading="lazy" />
+                    <img src={`${import.meta.env.BASE_URL}training/${r.png}`} alt={r.label} loading="lazy" />
                     <span className="gallery-tile-overlay">real</span>
                   </div>
                   <div className="gallery-tile-caption">
@@ -176,7 +176,7 @@ export function BenchmarkGallery() {
                   title={`${e.name} · seed ${e.seed} · ${e.shapeCount} shapes · ${e.size}px`}
                 >
                   <div className="gallery-tile-thumb">
-                    <img src={`/training/${e.png}`} alt={e.name} loading="lazy" />
+                    <img src={`${import.meta.env.BASE_URL}training/${e.png}`} alt={e.name} loading="lazy" />
                     <span className="gallery-tile-overlay">seed {e.seed}</span>
                     {e.noise && e.noise !== 'clean' && (
                       <span className="gallery-tile-noise">{e.noise}</span>
