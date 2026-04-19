@@ -81,7 +81,12 @@ export const initialState: AppState = {
     tuned: false,
   },
 
-  diffMode: 'side-by-side',
+  // Default to the single-panel slider on narrow viewports — stacked
+  // three-panel side-by-side crushes images below useful size on mobile.
+  diffMode:
+    typeof window !== 'undefined' && window.innerWidth <= 640
+      ? 'slider'
+      : 'side-by-side',
   isProcessing: false,
   error: null,
 };

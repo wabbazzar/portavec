@@ -196,4 +196,23 @@
   .comparison-view .image-panel:last-child {
     grid-column: span 1;
   }
+
+  /* Each stacked panel gets enough height to show the image at a
+     reasonable size. Without this the flex-centered image collapses
+     to a few dozen pixels on narrow viewports. */
+  .image-panel {
+    min-height: 220px;
+  }
+  .panel-content {
+    min-height: 180px;
+  }
+
+  /* Header gets very tight on narrow screens — wrap title/dims/actions. */
+  .panel-header {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .panel-header-right {
+    gap: 6px;
+  }
 }

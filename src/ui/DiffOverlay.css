@@ -56,11 +56,23 @@
 
 /* Responsive */
 @media (max-width: 640px) {
-  .diff-text {
-    display: none;
+  .diff-overlay {
+    gap: 8px;
   }
-
+  .diff-label {
+    display: none; /* Save space; buttons remain self-explanatory with their labels. */
+  }
+  .diff-buttons {
+    flex-wrap: wrap;
+    padding: 2px;
+    gap: 2px;
+  }
   .diff-button {
-    padding: 6px 10px;
+    padding: 6px 8px;
+    font-size: 11px;
+    min-height: 36px;
+  }
+  .diff-icon {
+    display: none; /* Keep the text; icons are ambiguous without labels. */
   }
 }
