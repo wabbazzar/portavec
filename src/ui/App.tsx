@@ -246,10 +246,12 @@ function App() {
         )}
       </main>
 
-      <footer className="app-footer">
-        <MetricsPanel />
-        <ParameterControls />
-      </footer>
+      {sourceImage && (
+        <footer className="app-footer">
+          <MetricsPanel />
+          <ParameterControls />
+        </footer>
+      )}
     </div>
   );
 }

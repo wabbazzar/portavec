@@ -5,6 +5,24 @@
   min-height: 600px;
 }
 
+/* On narrow viewports we let content flow top-to-bottom instead of
+   viewport-locking. Mobile browsers need the whole page to scroll so
+   header, uploader, gallery, and (when loaded) metrics + params are
+   all reachable. Desktop keeps height:100vh so the comparison view
+   has a stable workspace. */
+@media (max-width: 768px) {
+  .app {
+    height: auto;
+    min-height: 100vh;
+  }
+  .app-main {
+    overflow: visible;
+  }
+  .landing {
+    overflow: visible;
+  }
+}
+
 /* Header */
 .app-header {
   display: flex;
