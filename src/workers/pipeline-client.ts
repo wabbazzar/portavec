@@ -49,6 +49,21 @@ function getWorker(): Worker {
   return worker;
 }
 
+/**
+ * Kill any in-flight pipeline. Terminates the worker (the only reliable
+ * way to interrupt a long-running synchronous pipeline in JS), rejects
+ * every pending promise with a "cancelled" error, and lets the next
+ * call lazily respawn. Safe to call when nothing is running.
+ */
+export function cancelPipeline(): void {
+  if (worker) {
+    worker.terminate();
+    worker = null;
+  }
+  for (const p of pending.values()) p.reject(new Error('cancelled'));
+  pending.clear();
+}
+
 function toImage(image: ImageData): { data: Uint8ClampedArray; w: number; h: number } {
   // Clone the buffer so the caller's ImageData stays usable after transfer.
   // Cost is a memcpy of the pixels (~1MB for 512×512), well under the

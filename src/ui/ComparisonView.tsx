@@ -129,6 +129,7 @@ export function ComparisonView() {
   const { sourceImage, resultSvg, resultRasterized, diffMode } = useAppState();
   const [zoom, setZoom] = useState(1);
   const [copyStatus, setCopyStatus] = useState<'idle' | 'ok' | 'err'>('idle');
+  const [copySvgStatus, setCopySvgStatus] = useState<'idle' | 'ok' | 'err'>('idle');
 
   const diffImage = sourceImage && resultRasterized
     ? createSimpleDiff(sourceImage, resultRasterized)
@@ -147,6 +148,18 @@ export function ComparisonView() {
     } catch {
       setCopyStatus('err');
       setTimeout(() => setCopyStatus('idle'), 2000);
+    }
+  }
+
+  async function copySvgSource() {
+    if (!resultSvg) return;
+    try {
+      await navigator.clipboard.writeText(resultSvg);
+      setCopySvgStatus('ok');
+      setTimeout(() => setCopySvgStatus('idle'), 1500);
+    } catch {
+      setCopySvgStatus('err');
+      setTimeout(() => setCopySvgStatus('idle'), 2000);
     }
   }
 
@@ -175,6 +188,13 @@ export function ComparisonView() {
         title="Copy vectorized image to clipboard as PNG (also try right-click → Copy Image)"
       >
         {copyStatus === 'ok' ? 'Copied ✓' : copyStatus === 'err' ? 'Failed' : 'Copy PNG'}
+      </button>
+      <button
+        className={`copy-button ${copySvgStatus}`}
+        onClick={copySvgSource}
+        title="Copy the raw SVG source to clipboard — paste into Figma, CodePen, etc."
+      >
+        {copySvgStatus === 'ok' ? 'Copied ✓' : copySvgStatus === 'err' ? 'Failed' : 'Copy SVG'}
       </button>
     </div>
   );

@@ -241,6 +241,92 @@
   animation: vectorize-shimmer 1.6s linear infinite;
 }
 
+.cancel-btn {
+  /* Keep the same height as the primary button so the header doesn't
+     jump when we swap. The secondary base class supplies styling. */
+  min-width: 120px;
+}
+.cancel-btn:hover {
+  color: var(--accent-primary) !important;
+  border-color: var(--accent-primary) !important;
+}
+.cancel-btn .btn-spinner {
+  border-color: rgba(233, 69, 96, 0.25);
+  border-top-color: var(--accent-primary);
+}
+
+/* 404 */
+.notfound-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0b0b17;
+  color: #e8e8ea;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  padding: 40px 24px;
+}
+.notfound-inner {
+  max-width: 520px;
+  text-align: center;
+}
+.notfound-eyebrow {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--accent-primary);
+  margin-bottom: 24px;
+}
+.notfound-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: #f5f5f7;
+  margin: 0 0 18px;
+}
+.notfound-sub {
+  font-size: 15px;
+  color: #b5b8c4;
+  line-height: 1.55;
+  margin: 0 0 32px;
+}
+.notfound-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.notfound-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 12px 24px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+.notfound-cta.primary {
+  background: var(--accent-primary);
+  color: #fff;
+  border: none;
+}
+.notfound-cta.primary:hover { transform: translateY(-1px); }
+.notfound-cta.secondary {
+  background: transparent;
+  color: #f5f5f7;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.notfound-cta.secondary:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
 @keyframes vectorize-shimmer {
   0% { background-position: 300% 0; }
   100% { background-position: 0 0; }

@@ -12,14 +12,20 @@ import { LandingHero } from './LandingHero';
 import { PaletteStrip } from './PaletteStrip';
 import { downloadSvg } from '../utils/image';
 import { renderSvgToImageData } from '../algorithms/pipeline';
-import { runMultiInWorker, runSingleInWorker } from '../workers/pipeline-client';
+import { runMultiInWorker, runSingleInWorker, cancelPipeline } from '../workers/pipeline-client';
 import { imageToAscii, type AsciiGrid } from '../algorithms/ascii';
 import { calculateSSIM, calculatePixelDiff } from '../utils/metrics';
 import type { ThresholdMethod } from '../algorithms/threshold';
 import './App.css';
 
-function isAboutHash(): boolean {
-  return typeof window !== 'undefined' && window.location.hash === '#/about';
+type Route = 'demo' | 'about' | 'notfound';
+
+function resolveRoute(): Route {
+  if (typeof window === 'undefined') return 'demo';
+  const h = window.location.hash;
+  if (!h || h === '#' || h === '#/') return 'demo';
+  if (h === '#/about') return 'about';
+  return 'notfound';
 }
 
 function App() {
@@ -27,23 +33,45 @@ function App() {
   const dispatch = useAppDispatch();
   const [asciiResult, setAsciiResult] = useState<AsciiGrid | null>(null);
   const [asciiVisible, setAsciiVisible] = useState(true);
-  const [showAbout, setShowAbout] = useState(isAboutHash);
+  const [route, setRoute] = useState<Route>(resolveRoute);
 
   useEffect(() => {
-    const onHash = () => setShowAbout(isAboutHash());
+    const onHash = () => setRoute(resolveRoute());
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
 
-  if (showAbout) {
+  const goHome = () => {
+    history.pushState('', document.title, window.location.pathname + window.location.search);
+    setRoute('demo');
+  };
+
+  if (route === 'about') {
+    return <AboutPage onBack={goHome} />;
+  }
+  if (route === 'notfound') {
     return (
-      <AboutPage
-        onBack={() => {
-          // Remove the hash entirely so reload lands on the demo.
-          history.pushState('', document.title, window.location.pathname + window.location.search);
-          setShowAbout(false);
-        }}
-      />
+      <div className="notfound-page">
+        <div className="notfound-inner">
+          <div className="notfound-eyebrow">404</div>
+          <h1 className="notfound-title">That page isn't here.</h1>
+          <p className="notfound-sub">
+            You might have followed a broken link. The demo and the About page are where we live.
+          </p>
+          <div className="notfound-ctas">
+            <button className="notfound-cta primary" onClick={goHome}>
+              ← Demo
+            </button>
+            <a
+              className="notfound-cta secondary"
+              href="#/about"
+              onClick={(e) => { e.preventDefault(); window.location.hash = '#/about'; }}
+            >
+              About
+            </a>
+          </div>
+        </div>
+      </div>
     );
   }
 
@@ -128,10 +156,13 @@ function App() {
         },
       });
     } catch (err) {
-      dispatch({
-        type: 'SET_ERROR',
-        payload: err instanceof Error ? err.message : 'Vectorization failed',
-      });
+      const message = err instanceof Error ? err.message : 'Vectorization failed';
+      // 'cancelled' is a user action, not a failure — swallow silently.
+      if (message === 'cancelled') {
+        dispatch({ type: 'SET_PROCESSING', payload: false });
+      } else {
+        dispatch({ type: 'SET_ERROR', payload: message });
+      }
     }
   };
 
@@ -163,15 +194,27 @@ function App() {
           </a>
           {sourceImage && (
             <>
-              <button
-                className={`primary vectorize-btn${isProcessing ? ' processing' : ''}`}
-                onClick={handleVectorize}
-                disabled={isProcessing}
-                aria-label={isProcessing ? 'Vectorizing' : 'Vectorize'}
-              >
-                {isProcessing && <span className="btn-spinner" aria-hidden />}
-                <span className="btn-label">{isProcessing ? 'Vectorizing…' : 'Vectorize'}</span>
-              </button>
+              {isProcessing ? (
+                <button
+                  className="secondary vectorize-btn cancel-btn"
+                  onClick={() => {
+                    cancelPipeline();
+                    dispatch({ type: 'SET_PROCESSING', payload: false });
+                  }}
+                  aria-label="Cancel vectorization"
+                >
+                  <span className="btn-spinner" aria-hidden />
+                  <span className="btn-label">Cancel</span>
+                </button>
+              ) : (
+                <button
+                  className="primary vectorize-btn"
+                  onClick={handleVectorize}
+                  aria-label="Vectorize"
+                >
+                  <span className="btn-label">Vectorize</span>
+                </button>
+              )}
               <button className="secondary" onClick={handleAsciify}>
                 ASCIIify
               </button>
