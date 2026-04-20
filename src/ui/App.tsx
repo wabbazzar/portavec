@@ -8,6 +8,7 @@ import { MetricsPanel } from './MetricsPanel';
 import { ParameterControls } from './ParameterControls';
 import { DiffOverlay } from './DiffOverlay';
 import { AboutPage } from './AboutPage';
+import { LandingHero } from './LandingHero';
 import { downloadSvg } from '../utils/image';
 import { renderSvgToImageData } from '../algorithms/pipeline';
 import { runMultiInWorker, runSingleInWorker } from '../workers/pipeline-client';
@@ -202,6 +203,7 @@ function App() {
 
         {!sourceImage ? (
           <div className="landing">
+            <LandingHero />
             <div className="upload-section">
               <ImageLoader />
             </div>
