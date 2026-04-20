@@ -84,9 +84,13 @@ function main(): void {
     salientSeedBudget: 8,
     mergeThreshold: 4,
   };
-  process.stderr.write(`forest_cat config: ${JSON.stringify(cfg)}\n`);
+  // 2px minContourLength closes the sliver gaps between layers that show up
+  // in the landing-hero before/after scrub when the default (3) drops
+  // small contours along seams.
+  const cfgWithContour = { ...cfg, minContourLength: 2 };
+  process.stderr.write(`forest_cat config: ${JSON.stringify(cfgWithContour)}\n`);
 
-  const result = runMultiColorPipeline(img, cfg);
+  const result = runMultiColorPipeline(img, cfgWithContour);
 
   // Step 2: quantized rasterized output
   const quant = multicolorToImageData(result);
