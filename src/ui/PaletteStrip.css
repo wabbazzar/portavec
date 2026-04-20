@@ -1,0 +1,78 @@
+.palette-strip {
+  margin: 12px 0 4px;
+  padding: 12px 16px;
+  background-color: var(--bg-panel);
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
+}
+
+.palette-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.palette-count {
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--text-secondary);
+  opacity: 0.7;
+}
+
+.palette-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(58px, 1fr));
+  gap: 8px;
+}
+
+.palette-swatch {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: stretch;
+  cursor: default;
+}
+
+.swatch-chip {
+  width: 100%;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.palette-swatch:hover .swatch-chip {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.swatch-hex {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 10px;
+  color: var(--text-primary);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.swatch-meta {
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 9px;
+  color: var(--text-secondary);
+  text-align: center;
+  opacity: 0.7;
+}
+
+@media (max-width: 640px) {
+  .palette-row {
+    grid-template-columns: repeat(auto-fill, minmax(52px, 1fr));
+    gap: 6px;
+  }
+  .swatch-chip { height: 22px; }
+  .swatch-hex  { font-size: 9px; }
+  .swatch-meta { font-size: 8px; }
+}

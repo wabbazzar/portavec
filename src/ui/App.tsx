@@ -9,6 +9,7 @@ import { ParameterControls } from './ParameterControls';
 import { DiffOverlay } from './DiffOverlay';
 import { AboutPage } from './AboutPage';
 import { LandingHero } from './LandingHero';
+import { PaletteStrip } from './PaletteStrip';
 import { downloadSvg } from '../utils/image';
 import { renderSvgToImageData } from '../algorithms/pipeline';
 import { runMultiInWorker, runSingleInWorker } from '../workers/pipeline-client';
@@ -223,6 +224,7 @@ function App() {
             <div className="comparison-section">
               <ComparisonView />
             </div>
+            <PaletteStrip svg={resultSvg} />
             {asciiResult && (
               <div
                 style={{
