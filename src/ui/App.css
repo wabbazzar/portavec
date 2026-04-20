@@ -193,6 +193,30 @@
   border-top: 1px solid var(--border-color);
 }
 
+/* Always-present small credit/strip at the bottom of the demo. */
+.app-credit {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 16px 18px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  flex-wrap: wrap;
+}
+.app-credit a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+.app-credit a:hover {
+  color: var(--accent-primary);
+}
+.credit-dot {
+  opacity: 0.5;
+}
+
 /* Vectorize button spinner state */
 .vectorize-btn {
   display: inline-flex;

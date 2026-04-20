@@ -294,6 +294,23 @@ function App() {
           <ParameterControls />
         </footer>
       )}
+
+      <div className="app-credit">
+        <span>
+          Built by{' '}
+          <a href="https://wabbazzar.com" target="_blank" rel="noreferrer">
+            Wesley Beckner
+          </a>
+        </span>
+        <span className="credit-dot">·</span>
+        <a href="#/about" onClick={(e) => { e.preventDefault(); window.location.hash = '#/about'; }}>
+          How it works
+        </a>
+        <span className="credit-dot">·</span>
+        <a href="https://github.com/wabbazzar/portavec" target="_blank" rel="noreferrer">
+          Source
+        </a>
+      </div>
     </div>
   );
 }
