@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useAppDispatch } from './context/AppContext';
 import { loadImageFromUrl } from '../utils/image';
+import { replaceUrlState } from './url-state';
 
 interface ManifestEntry {
   name: string;
@@ -105,6 +106,8 @@ export function BenchmarkGallery() {
           },
         });
       }
+      // Reflect selection in URL so the view is shareable.
+      replaceUrlState({ image: name, params: {} });
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {

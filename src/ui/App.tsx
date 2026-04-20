@@ -10,6 +10,8 @@ import { DiffOverlay } from './DiffOverlay';
 import { AboutPage } from './AboutPage';
 import { LandingHero } from './LandingHero';
 import { PaletteStrip } from './PaletteStrip';
+import { parseUrlState, replaceUrlState } from './url-state';
+import { loadImageFromUrl } from '../utils/image';
 import { downloadSvg } from '../utils/image';
 import { renderSvgToImageData } from '../algorithms/pipeline';
 import { runMultiInWorker, runSingleInWorker, cancelPipeline } from '../workers/pipeline-client';
@@ -40,6 +42,78 @@ function App() {
     window.addEventListener('hashchange', onHash);
     return () => window.removeEventListener('hashchange', onHash);
   }, []);
+
+  // Deep-link: on first mount, if ?image=<name> is in the URL, load it
+  // from the training corpus. If URL also carries params (k=..&sw=..),
+  // they override the tuning manifest; otherwise the tuned config is
+  // applied as if the user had clicked the gallery tile.
+  useEffect(() => {
+    if (sourceImage) return;
+    const state = parseUrlState();
+    if (!state.image) return;
+    const name = state.image;
+    const base = import.meta.env.BASE_URL;
+    (async () => {
+      try {
+        const image = await loadImageFromUrl(`${base}training/${name}.png`);
+        dispatch({
+          type: 'SET_SOURCE_IMAGE',
+          payload: { image, fileName: `${name}.png`, sourceType: 'benchmark' },
+        });
+        if (Object.keys(state.params).length > 0) {
+          // URL params take precedence.
+          dispatch({ type: 'SET_PARAMETERS', payload: { ...state.params, tuned: false } });
+        } else {
+          // No URL params — try the tuning manifest.
+          try {
+            const mRes = await fetch(`${base}training/tuning-manifest.json`);
+            if (mRes.ok) {
+              const m: { entries?: Record<string, { best: { config: { k?: number; saliencyWeight: number; salientSeedBudget: number; mergeThreshold: number } } }> } = await mRes.json();
+              const cfg = m.entries?.[name]?.best.config;
+              if (cfg) {
+                dispatch({
+                  type: 'SET_PARAMETERS',
+                  payload: {
+                    colors: cfg.k ?? 0,
+                    saliencyWeight: cfg.saliencyWeight,
+                    salientSeedBudget: cfg.salientSeedBudget,
+                    mergeThreshold: cfg.mergeThreshold,
+                    tuned: true,
+                  },
+                });
+              }
+            }
+          } catch { /* silent — no manifest is fine */ }
+        }
+      } catch {
+        // Invalid image name, land on the normal demo.
+      }
+    })();
+    // Only run once on initial mount.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Keep URL in sync with live params (debounced).
+  useEffect(() => {
+    if (!sourceFileName) return;
+    const t = setTimeout(() => {
+      const name = sourceFileName.replace(/\.[^.]+$/, '');
+      // Only include params that differ from the "clean" state so the
+      // URL stays short when the user hasn't customized.
+      replaceUrlState({
+        image: name,
+        params: parameters.tuned
+          ? {}
+          : {
+              colors: parameters.colors,
+              saliencyWeight: parameters.saliencyWeight,
+              salientSeedBudget: parameters.salientSeedBudget,
+              mergeThreshold: parameters.mergeThreshold,
+            },
+      });
+    }, 300);
+    return () => clearTimeout(t);
+  }, [sourceFileName, parameters]);
 
   const goHome = () => {
     history.pushState('', document.title, window.location.pathname + window.location.search);
