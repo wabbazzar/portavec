@@ -54,6 +54,27 @@
 .header-actions {
   display: flex;
   gap: 8px;
+  align-items: center;
+}
+
+.header-link {
+  font-size: 13px;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+.header-link:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-panel);
+}
+
+@media (max-width: 768px) {
+  .header-link {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
 }
 
 /* Main */

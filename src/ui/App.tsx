@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useAppState, useAppDispatch } from './context/AppContext';
 import { ImageLoader } from './ImageLoader';
 import { BenchmarkGallery } from './BenchmarkGallery';
@@ -7,6 +7,7 @@ import { ComparisonView } from './ComparisonView';
 import { MetricsPanel } from './MetricsPanel';
 import { ParameterControls } from './ParameterControls';
 import { DiffOverlay } from './DiffOverlay';
+import { AboutPage } from './AboutPage';
 import { downloadSvg } from '../utils/image';
 import { renderSvgToImageData } from '../algorithms/pipeline';
 import { runMultiInWorker, runSingleInWorker } from '../workers/pipeline-client';
@@ -15,11 +16,34 @@ import { calculateSSIM, calculatePixelDiff } from '../utils/metrics';
 import type { ThresholdMethod } from '../algorithms/threshold';
 import './App.css';
 
+function isAboutHash(): boolean {
+  return typeof window !== 'undefined' && window.location.hash === '#/about';
+}
+
 function App() {
   const { sourceImage, sourceFileName, resultSvg, isProcessing, error, parameters } = useAppState();
   const dispatch = useAppDispatch();
   const [asciiResult, setAsciiResult] = useState<AsciiGrid | null>(null);
   const [asciiVisible, setAsciiVisible] = useState(true);
+  const [showAbout, setShowAbout] = useState(isAboutHash);
+
+  useEffect(() => {
+    const onHash = () => setShowAbout(isAboutHash());
+    window.addEventListener('hashchange', onHash);
+    return () => window.removeEventListener('hashchange', onHash);
+  }, []);
+
+  if (showAbout) {
+    return (
+      <AboutPage
+        onBack={() => {
+          // Remove the hash entirely so reload lands on the demo.
+          history.pushState('', document.title, window.location.pathname + window.location.search);
+          setShowAbout(false);
+        }}
+      />
+    );
+  }
 
   const handleAsciify = () => {
     if (!sourceImage) return;
@@ -117,6 +141,24 @@ function App() {
           <span className="header-subtitle">Raster to Vector</span>
         </div>
         <div className="header-actions">
+          <a
+            className="header-link"
+            href="#/about"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.hash = '#/about';
+            }}
+          >
+            About
+          </a>
+          <a
+            className="header-link"
+            href="https://github.com/wabbazzar/portavec"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub ↗
+          </a>
           {sourceImage && (
             <>
               <button

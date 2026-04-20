@@ -1,0 +1,312 @@
+/* About page — echoes wabbazzar.com / shredly.me aesthetic:
+   editorial dark-on-near-black, Inter sans, huge headline, uppercase
+   tracking-wide section labels, card-based stage walkthrough,
+   generous vertical rhythm. */
+
+.about-page {
+  min-height: 100vh;
+  background-color: #0b0b17;
+  color: #e8e8ea;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  font-feature-settings: 'ss01', 'cv11';
+  line-height: 1.55;
+}
+
+.about-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(11, 11, 23, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.about-header-inner {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.about-back,
+.about-github {
+  font-size: 13px;
+  color: #9ca0af;
+  background: transparent;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+}
+.about-back:hover,
+.about-github:hover {
+  color: #f5f5f7;
+}
+.about-brand {
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f5f5f7;
+}
+
+.about-main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 24px 120px;
+}
+
+/* Hero */
+.about-hero {
+  padding: 40px 0 80px;
+  max-width: 800px;
+}
+.about-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #e94560;
+  margin-bottom: 32px;
+}
+.about-title {
+  font-size: clamp(42px, 6.4vw, 76px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  color: #f5f5f7;
+  margin: 0 0 32px 0;
+}
+.about-title .accent {
+  color: #e94560;
+}
+.about-lede {
+  font-size: 19px;
+  line-height: 1.55;
+  color: #b5b8c4;
+  margin: 0;
+  max-width: 640px;
+}
+
+/* Sections */
+.about-section {
+  padding: 60px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+.about-section-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9ca0af;
+  margin-bottom: 40px;
+}
+.about-h2 {
+  font-size: clamp(28px, 3.4vw, 40px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: #f5f5f7;
+  margin: 0 0 24px 0;
+  line-height: 1.15;
+}
+
+/* Stage cards */
+.about-stages {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+}
+.stage-card {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 40px;
+  align-items: start;
+  padding: 32px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+}
+.stage-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.stage-num {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #e94560;
+  font-variant-numeric: tabular-nums;
+}
+.stage-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #9ca0af;
+}
+.stage-title {
+  font-size: clamp(22px, 2.6vw, 28px);
+  font-weight: 700;
+  color: #f5f5f7;
+  margin: 0 0 18px 0;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+.stage-caption {
+  font-size: 15px;
+  line-height: 1.65;
+  color: #b5b8c4;
+  margin: 0;
+}
+.stage-figure {
+  grid-row: 1 / 3;
+  grid-column: 2;
+  background: #141423;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 1376 / 768;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+.stage-figure img,
+.stage-figure object {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  background: #fff;
+}
+
+/* Two-column (Why / How) */
+.about-two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+}
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.about-list li {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #b5b8c4;
+  padding-left: 20px;
+  position: relative;
+}
+.about-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #e94560;
+}
+.about-list strong {
+  color: #f5f5f7;
+  font-weight: 600;
+}
+
+/* Stack row */
+.about-stack .stack-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  font-size: 14px;
+  color: #b5b8c4;
+  font-variant-numeric: tabular-nums;
+}
+.about-stack .stack-row span:nth-child(even) {
+  color: #5a5d6b;
+}
+
+/* CTA */
+.about-cta {
+  padding: 80px 0 60px;
+  text-align: center;
+}
+.about-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background: #e94560;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  letter-spacing: 0.01em;
+  box-shadow: 0 10px 30px rgba(233, 69, 96, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+.about-cta-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 40px rgba(233, 69, 96, 0.35);
+}
+
+/* Footer */
+.about-footer {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 40px 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: #6e7180;
+}
+.about-footer a {
+  color: #9ca0af;
+  text-decoration: none;
+}
+.about-footer a:hover {
+  color: #f5f5f7;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .stage-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 24px;
+  }
+  .stage-figure {
+    grid-row: auto;
+    grid-column: auto;
+    order: -1;
+  }
+  .about-two-col {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  .about-main {
+    padding: 56px 20px 80px;
+  }
+  .about-hero {
+    padding: 24px 0 56px;
+  }
+  .about-section {
+    padding: 48px 0;
+  }
+  .about-footer {
+    flex-direction: column;
+    gap: 8px;
+    text-align: center;
+  }
+}
